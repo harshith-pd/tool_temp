@@ -37,15 +37,4 @@ ACTIVITY = "activity"
 PROVIDER = "provider"
 RECEIVER = "receiver"
 
-  
-  
- ########################################## 
- INPUT_FOLDER = "/Users/harshith/Desktop/python/final_version/tool_temp/test_run/Instagram/08_12_2018_21_16_19/input"
-
-APKTOOL_OUTPUT_FOLDER = "/Users/harshith/Desktop/python/final_version/tool_temp/test_run/Instagram/08_12_2018_21_16_19/output/apktool"
-
-ENJARIFY_OUTPUT_FOLDER = "/Users/harshith/Desktop/python/final_version/tool_temp/test_run/Instagram/08_12_2018_21_16_19/output/enjarify"
-
-LOGS_FOLDER = "/Users/harshith/Desktop/python/final_version/tool_temp/test_run/Instagram/08_12_2018_21_16_19/logs"
-
-REPORT_FOLDER = "/Users/harshith/Desktop/python/final_version/tool_temp/test_run/Instagram/08_12_2018_21_16_19/report"
+##########################################
