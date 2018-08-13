@@ -30,7 +30,7 @@
      error_string="command not found"
      usage="$(basename "$0") -input_app_file=<input file location> -input_source_code=<input source code>"
 
-     WORKSPACE="/Users/harshith/Desktop/python/final_version/tool_temp"
+     WORKSPACE="$HOME/Desktop/tool_temp"
      TMP_FOLDER_LOCATION="${WORKSPACE}/.tmp"
      SCRIPTS_FOLDER="${WORKSPACE}/Scripts"
      TOOLS_FOLDER="${WORKSPACE}/Tools"

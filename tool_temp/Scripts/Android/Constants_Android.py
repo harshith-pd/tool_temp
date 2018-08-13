@@ -37,4 +37,15 @@ ACTIVITY = "activity"
 PROVIDER = "provider"
 RECEIVER = "receiver"
 
-##########################################
+ 
+  
+ ########################################## 
+ INPUT_FOLDER = "/Users/digitalsecurity/Desktop/tool_temp/test_run/ChiMarathon/08_13_2018_15_07_28/input"
+
+APKTOOL_OUTPUT_FOLDER = "/Users/digitalsecurity/Desktop/tool_temp/test_run/ChiMarathon/08_13_2018_15_07_28/output/apktool"
+
+ENJARIFY_OUTPUT_FOLDER = "/Users/digitalsecurity/Desktop/tool_temp/test_run/ChiMarathon/08_13_2018_15_07_28/output/enjarify"
+
+LOGS_FOLDER = "/Users/digitalsecurity/Desktop/tool_temp/test_run/ChiMarathon/08_13_2018_15_07_28/logs"
+
+REPORT_FOLDER = "/Users/digitalsecurity/Desktop/tool_temp/test_run/ChiMarathon/08_13_2018_15_07_28/report"

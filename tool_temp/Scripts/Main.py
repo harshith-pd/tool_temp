@@ -1,6 +1,5 @@
 import Constants
 
-from CreateTestInstanceDirectory import *
 from HelperFunctions import *
 from ClassTestComponents import TestComponents
 from AppUnzipTests import *
