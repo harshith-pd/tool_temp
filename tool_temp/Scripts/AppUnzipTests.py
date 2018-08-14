@@ -14,10 +14,10 @@ def check_signing_info(verification_keys=None, original_folder_path=None):
 
     if verification_keys in execution_output_from_shell_command['OUTPUT']:
         logging.info("App signed using a debug key")
-        return "{} found in signing key. App signed using a debug keystore\n".format(verification_keys)
+        return "{} found in signing key. App signed using a debug keystore".format(verification_keys)
     else:
         logging.info("App signed using a debug key")
-        return "{} not found in signing key. App not signed using a debug keystore\n".format(verification_keys)
+        return "{} - {} not found in signing key. App not signed using a debug keystore".format(Constants.SEVERE, verification_keys)
 
 
 def android_xml_content_verification(android_manifest_xml_path=None):
@@ -41,7 +41,7 @@ def android_xml_content_verification(android_manifest_xml_path=None):
             component_name = 1
             for application_components in regex_expression_variable.findall(android_xml_file_contents):
                 logging.info("{} with name {} has android:exported set to true".format(application_components[component],application_components[component_name]))
-                execution_output = "{}\n{} with name {} has android:exported set to true".format(execution_output,application_components[component],application_components[component_name])
+                execution_output = "{} - {}, {} with name {} has android:exported set to true".format(Constants.MEDIUM,execution_output,application_components[component],application_components[component_name])
 
         elif Constants.ANDROID_PROTECTION_LEVEL_KEY in key:
             permission_name = 0
@@ -49,12 +49,12 @@ def android_xml_content_verification(android_manifest_xml_path=None):
             for permission in regex_expression_variable.findall(android_xml_file_contents):
                 if permission[protection_level] != Constants.ANDROID_PROTECTION_VALUE_SIGNATURE:
                     logging.info("permission with name {} has android:protectionlevel set to {}".format(permission[permission_name],permission[protection_level]))
-                    execution_output = "{}\npermission with name {} has android:protectionlevel set to {}".format(execution_output,permission[permission_name],permission[protection_level])
+                    execution_output = "{} - {}, permission with name {} has android:protectionlevel set to {}".format(Constants.MEDIUM,execution_output,permission[permission_name],permission[protection_level])
 
         else:
             for regex_matches in regex_expression_variable.findall(android_xml_file_contents):
                 logging.info("{} set to true : {}".format(key, regex_matches))
-                execution_output = "{}\n{} set to true : {}".format(execution_output,key, regex_matches)
+                execution_output = "{} - {}, {} set to true : {}".format(Constants.MEDIUM, execution_output,key, regex_matches)
 
     if len(execution_output) == 0:
         logging.info("No issues foung in {}".format(android_manifest_xml_path))
@@ -64,7 +64,7 @@ def android_xml_content_verification(android_manifest_xml_path=None):
 
 
 def check_permissions(android_manifest_xml_path=None):
-    standard_android_permission_file_path = "{}/{}".format(Constants.ROOT_FOLDER, "pythonFiles/Permissionsfile.txt")
+    standard_android_permission_file_path = "{}/{}".format(Constants.SCRIPTS_FOLDER, "/Permissionsfile.txt")
 
     # construct regex to match the user features/permissions
     regex_string_for_matching_permissions_and_features_in_android_manifest_xml = get_permissions_regex()
@@ -97,7 +97,8 @@ def check_permissions(android_manifest_xml_path=None):
                         permission_or_feature[permission_or_feature_name])
                     )
 
-                    execution_output = "{}\n{} name : {} present in android_manifest.xml file".format(
+                    execution_output = "{} - {}, {} name : {} present in android_manifest.xml file".format(
+                        Constants.MEDIUM,
                         execution_output,
                         permission_or_feature[permission_or_feature_id],
                         permission_or_feature[permission_or_feature_name]
@@ -111,7 +112,8 @@ def check_permissions(android_manifest_xml_path=None):
                     permission_or_feature[permission_or_feature_name])
                 )
 
-                execution_output = "{}\n{} name : {} is custom-permission/feature present in android_manifest.xml file".format(
+                execution_output = "{} - {}, {} name : {} is custom-permission/feature present in android_manifest.xml file".format(
+                    Constants.MEDIUM,
                     execution_output,
                     permission_or_feature[permission_or_feature_id],
                     permission_or_feature[permission_or_feature_name]
@@ -119,7 +121,7 @@ def check_permissions(android_manifest_xml_path=None):
 
     if len(execution_output) == 0:
         logging.info("No permissions entries found")
-        execution_output = "No permissions entries found\n"
+        execution_output = "No permissions entries found"
 
     return execution_output
 
@@ -135,16 +137,17 @@ def check_smali_files(smali_folder_path=None):
 
             if "smali" not in file:
                 logging.info("{}/{} is not a smali file".format(root, file))
-                execution_output = "{}\n{}/{} is not a smali file\n".format(execution_output, root, file)
+                execution_output = "{} - {}, {}/{} is not a smali file".format(Constants.MEDIUM, execution_output, root, file)
 
     if len(execution_output) == 0:
         logging.info("No unencrypted files found")
-        execution_output = "No unencrypted files found\n"
+        execution_output = "No unencrypted files found"
 
     return execution_output
 
 
 def check_assets_folder(assets_folder_path=None):
+    execution_output = ""
     for assets_folder_content in os.listdir(assets_folder_path):
         absolute_path_of_assets_folder_content = "{}/{}".format(assets_folder_path,assets_folder_content)
         # check if any of them are directories
@@ -160,6 +163,7 @@ def check_assets_folder(assets_folder_path=None):
                         sub_folder_contents.append("\nFiles present in directory : {}".format(root))
                         sub_folder_contents.append("{}".format('\n'.join(files)))
             logging.info("\n{}\n".format("\n".join(sub_folder_contents)))
+            execution_output = "{} - {} is not encrypted/zipped".format(Constants.MEDIUM, absolute_path_of_assets_folder_content)
 
         elif os.path.isfile(absolute_path_of_assets_folder_content):
             clear_directory(Constants.TMP_FOLDER)
@@ -171,6 +175,7 @@ def check_assets_folder(assets_folder_path=None):
 
                 if unzip_status == Constants.ENCRYPTED or unzip_status == Constants.CORRUPT or unzip_status == Constants.NOT_A_ZIP:
                     logging.info("{} is {}".format(absolute_path_of_assets_folder_content,unzip_status))
+                    execution_output = "{} is encrypted".format(Constants.MEDIUM, absolute_path_of_assets_folder_content)
                 else:
                     # if unzip successful, print the contents
                     logging.info("{} unzipped, listing contents...".format(absolute_path_of_assets_folder_content))
@@ -181,10 +186,10 @@ def check_assets_folder(assets_folder_path=None):
                             if any(".js" in file or ".css" in file or ".html" in file for file in files):
                                 sub_folder_contents.append("{}".format('\n'.join(files)))
                     logging.info("\n{}\n".format("\n".join(sub_folder_contents)))
-
+                    execution_output = "{} - {} is not encrypted".format(Constants.MEDIUM, absolute_path_of_assets_folder_content)
         else:
             logging.info("{} is individual file".format(absolute_path_of_assets_folder_content))
-
+    return execution_output
 
 def check_res_xml_config_file(res_config_file_path=None):
     # read the contents of the config.xml file into a variable
@@ -205,21 +210,21 @@ def check_res_xml_config_file(res_config_file_path=None):
 
                 if Constants.ACCESS_ORIGIN_KEY == regex_expression_key:
                     logging.info("{} is set for access origin".format(regex_match))
-                    execution_output = "{}\n{} is set for access origin".format(execution_output,regex_match)
+                    execution_output = "{}, {} is set for access origin".format(execution_output,regex_match)
 
                 elif Constants.ALLOW_INTENT_KEY == regex_expression_key:
 
                     if Constants.ALLOW_INTENT_HTTPS == regex_match:
                         logging.info("{} is set for allowing https access".format(regex_match))
-                        execution_output = "{}\n{} is set for https access".format(execution_output,regex_match)
+                        execution_output = "{}, {} is set for https access".format(execution_output,regex_match)
 
                     elif Constants.ALLOW_INTENT_HTTP == regex_match:
                         logging.info("{} is set for allowing http access".format(regex_match))
-                        execution_output = "{}\n{} is set for http access".format(execution_output,regex_match)
+                        execution_output = "{}, {} is set for http access".format(execution_output,regex_match)
 
                 elif Constants.ALLOW_INTENT_NAVIGATION_KEY == regex_expression_key:
                     logging.info("{} is set for allowing navigation".format(regex_match))
-                    execution_output = "{}\n{} is set for allowing navigation".format(execution_output,regex_match)
+                    execution_output = "{}, {} is set for allowing navigation".format(execution_output,regex_match)
 
     return execution_output
 
@@ -236,13 +241,13 @@ def check_res_folder(res_folder_path=None):
         execution_output.append(check_res_xml_config_file(res_config_file_path))
     else:
         logging.info("{} not found".format(res_config_file_path))
-        execution_output.append("{}\n{} is not found".format(execution_output, res_config_file_path))
+        execution_output.append("{}, {} is not found".format(execution_output, res_config_file_path))
 
     if os.path.exists(res_network_security_config_file_path):
         pass
     else:
         logging.info("{} not found".format(res_network_security_config_file_path))
-        execution_output.append("{}\n{} is not found".format(execution_output, res_network_security_config_file_path))
+        execution_output.append("{}, {} is not found".format(execution_output, res_network_security_config_file_path))
 
     return "\n".join(execution_output)
 
@@ -332,3 +337,5 @@ def execute_tests(test_dictionary):
 
 
         folder['execution_result'] = execution_result
+    test_dictionary['Folder'] = folders_array
+    return test_dictionary

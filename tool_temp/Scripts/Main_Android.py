@@ -13,17 +13,13 @@ logging.basicConfig(filename="{}/{}".format(logging_directory, "log.txt"),
                               level=logging.DEBUG)
 
 ### parse the config file
-xml_dict = parse_xml_to_dict("{}/{}".format(Constants.CONFIG_FOLDER, 'sample_config.xml'))
+xml_dict = parse_xml_to_dict("{}/{}".format(Constants.CONFIG_FOLDER, 'Config_Android.xml'))
 
 test_result = {}
 for test_component in xml_dict.keys():
     if TestComponents.APP_UNZIP.value in test_component:
-        # execute_shell_command("java -jar {}/apktool.jar d -f -o {} /Users/a391141/SecurityTestAutomation/input/sample.apk".format(Constants.ROOT_FOLDER,Constants.OUTPUT_FOLDER)).keys()
         test_result = execute_tests(xml_dict[TestComponents.APP_UNZIP.value]['Test'])
-    elif TestComponents.SOURCE_CODE_ANALYSIS.value in test_component:
-        pass
-    elif TestComponents.ROOTED_DEVICE_TESTS.value in test_component:
-        pass
+        print (test_result)
     elif TestComponents.DEX_TO_JAR.value in test_component:
         pass
     else:

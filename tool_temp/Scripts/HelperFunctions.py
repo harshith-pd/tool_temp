@@ -13,7 +13,7 @@ import xml.etree.ElementTree as ET
 #######################################################################################################################################################
 
 #######################################################################################################################################################
-############## Funtion to log_error_and_exit test execution 
+############## Funtion to log_error_and_exit test execution
 ############## input = error_string : String
 ############## output = -
 def log_error_and_exit(error_string):
@@ -144,7 +144,7 @@ def rename_file(source_name, destination_name):
 # print (rename_file("src_path,dst_path")
 
 #######################################################################################################################################################
-############## Funtion to change_permissions 
+############## Funtion to change_permissions
 ############## input = filename: String, recursive: Bool
 ############## output = -
 def change_permissions(path, recursive):
@@ -163,7 +163,7 @@ def change_permissions(path, recursive):
 
 
 #######################################################################################################################################################
-############## Funtion to check if the keys are present in the output 
+############## Funtion to check if the keys are present in the output
 ############## input = keys : arrayString, output : String
 ############## output = Bool
 def keys_present_in_output(keys, output):
@@ -177,7 +177,7 @@ def keys_present_in_output(keys, output):
 # print (keys_present_in_output(["sdf","sdaw","asdadsf"],"asdf, asdfadfasdfasdasdc")
 
 #######################################################################################################################################################
-############## Funtion to write contents to a file 
+############## Funtion to write contents to a file
 ############## input = filename: String, string: String
 ############## output = -
 def write_to_file(file_name, string):
@@ -196,7 +196,7 @@ def write_to_file(file_name, string):
 # print (keys_present_in_output(["sdf","sdaw","asdadsf"],"asdf, asdfadfasdfasdasdc")
 
 #######################################################################################################################################################
-############## Funtion to check if string exists in a file 
+############## Funtion to check if string exists in a file
 ############## input = filename: String, string: String
 ############## output = -
 def check_string_exists_in_file(file_name, string):
@@ -211,7 +211,7 @@ def check_string_exists_in_file(file_name, string):
 
 
 #######################################################################################################################################################
-############## Funtion to delete lines in a file 
+############## Funtion to delete lines in a file
 ############## input = filename: String, string: String
 ############## output = -
 def delete_line_containing_the_string(file_name, string):
@@ -235,7 +235,7 @@ def delete_line_containing_the_string(file_name, string):
 # delete_line_containing_the_string("/Users/a391141/SecurityTestAutomation/pythonFiles/Constants.py","LOGGING_FOLDER")
 
 #######################################################################################################################################################
-############## Funtion to write contents to end of a file 
+############## Funtion to write contents to end of a file
 ############## input = filename: String, string: String
 ############## output = -
 def append_line_at_end_of_file(file_name, string):

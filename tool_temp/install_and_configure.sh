@@ -28,7 +28,8 @@
 ### Specify the folder structure & variables
 ## constants
      error_string="command not found"
-     usage="$(basename "$0") -input_app_file=<input file location> -input_source_code=<input source code>"
+#     usage="$(basename "$0") -input_app_file=<input file location> -input_source_code=<input source code>"
+     usage="$(basename "$0") -input_app_file=<input file location>"
 
      WORKSPACE="$HOME/Desktop/tool_temp"
      TMP_FOLDER_LOCATION="${WORKSPACE}/.tmp"
@@ -43,10 +44,12 @@
 
      app_file_path=""
      app_source_code_path=""
+     app_type=""
 
 ## folder structures
-    ios_folder_structure=( "INPUT_FOLDER:input" "OUTPUT_FOLDER:output" "LOGS_FOLDER:logs" "REPORT_FOLDER:report" )
-    android_folder_structure=( "INPUT_FOLDER:input" "APKTOOL_OUTPUT_FOLDER:output/apktool" "ENJARIFY_OUTPUT_FOLDER:output/enjarify" "LOGS_FOLDER:logs" "REPORT_FOLDER:report" )
+    ios_folder_structure=( "INPUT_FOLDER:input" "OUTPUT_FOLDER:output" "LOGS_FOLDER:logs" "REPORT_FOLDER:report" "CONFIG_FOLDER:config" )
+    android_folder_structure=( "INPUT_FOLDER:input" "APKTOOL_OUTPUT_FOLDER:output/apktool" "ENJARIFY_OUTPUT_FOLDER:output/enjarify" "LOGS_FOLDER:logs" "REPORT_FOLDER:report" "CONFIG_FOLDER:config" )
+    generic_folder_structure=( "TEST_RUN_FOLDER:test_run" "CONFIG_ROOT_FOLDER:config" "SCRIPTS_FOLDER:Scripts" "TOOLS_FOLDER:Tools" "TMP_FOLDER:.tmp" )
 
 #####################################################################################
 # function desc : called during an uncrossable exception
@@ -78,9 +81,11 @@ get_app_type_and_create_folders () {
     app_file_extension=${app_file##*.}
     if [[ "$app_file_extension" == "ipa" ]]
     then
+        app_type="iOS"
         create_ios_app_instance_folder $app_file
     elif [[ "$app_file_extension" == "apk" ]]
     then
+        app_type="Android"
         create_android_app_instance_folder $app_file
     else
         echo "Invalid app file, please input proper file type"
@@ -117,6 +122,16 @@ get_android_app_name () {
     aapt dump badging $app_file | grep 'application-label:' | sed "s/.*label:'\(.*\)'/\1/" || handle_error "Error in dumping app info"
 }
 
+write_generic_folder_structure () {
+  for folder_name in "${generic_folder_structure[@]}"
+  do
+      KEY="${folder_name%%:*}"
+      VALUE="${folder_name#*:}"
+
+      echo "$KEY = \"${WORKSPACE}/$VALUE\"\n" >> $TMP_FOLDER_LOCATION/tmp.txt
+  done
+}
+
 #####################################################################################
 # function desc : create folder structure for the ios apps evaluation
 # arguments : input application file
@@ -138,6 +153,7 @@ create_ios_app_instance_folder () {
 
     cp -rf ${TMP_FOLDER_LOCATION}/Payload/$app_name.app/* "${TEST_RUN_FOLDER}/$app_name/$date_time/output/"
     cp -f $app_file "${TEST_RUN_FOLDER}/$app_name/$date_time/input/"
+    cp -f ${WORKSPACE}/config/Config_$app_type.xml "${TEST_RUN_FOLDER}/$app_name/$date_time/config/"
 }
 
 #####################################################################################
@@ -160,6 +176,7 @@ create_android_app_instance_folder () {
     done
 
     cp -f $app_file "${TEST_RUN_FOLDER}/$app_name/$date_time/input/" 2>/dev/null 1>/dev/null
+    cp -f ${WORKSPACE}/config/Config_$app_type.xml "${TEST_RUN_FOLDER}/$app_name/$date_time/config/"
     $APK_TOOL_COMMAND d -f -o ${TEST_RUN_FOLDER}/$app_name/$date_time/output/apktool $app_file 2>/dev/null 1>/dev/null || handle_error "Error running apktool jar on the apk file"
     $ENJARIFY_TOOL_COMMAND $app_file -o ${TEST_RUN_FOLDER}/$app_name/$date_time/output/enjarify/$app_name.jar 2>/dev/null 1>/dev/null || handle_error "Error decompiling the apk file"
     $JDCORE_JAR ${TEST_RUN_FOLDER}/$app_name/$date_time/output/enjarify/$app_name.jar ${TEST_RUN_FOLDER}/$app_name/$date_time/output/enjarify/ 2>/dev/null 1>/dev/null || handle_error "Error decompiling app jar "
@@ -174,11 +191,16 @@ create_constants_file () {
     split_delimiter="##########################################"
     constants_file_contents=$(cat $SCRIPTS_FOLDER/Constants.py)
     constants_file_base_contents="${constants_file_contents%%$split_delimiter*}"
-    echo "$constants_file_base_contents \n $split_delimiter \n $(cat $TMP_FOLDER_LOCATION/tmp.txt)" > $TMP_FOLDER_LOCATION/tmp_constants.txt
+    echo "$constants_file_base_contents \n$split_delimiter \n$(cat $TMP_FOLDER_LOCATION/tmp.txt)" > $TMP_FOLDER_LOCATION/tmp_constants.txt
     mv -f $TMP_FOLDER_LOCATION/tmp_constants.txt $SCRIPTS_FOLDER/Constants.py
 }
 
-
+run_security_scripts_on_application () {
+    current_directory=$(pwd)
+    cd ${WORKSPACE}/Scripts
+    python3 Main_$app_type.py || handle_error "Failure to run the Main script for security tests"
+    cd $current_directory
+}
 ################################## Consume options
 while [ $# -gt 0 ]
 do
@@ -191,14 +213,6 @@ do
         fi
         echo "Found input file $app_file..."
     ;;
-    -input_source_code=*)
-      app_source_code_path="${1#*=}"
-        if [ ! -f "$app_source_code_path" ]
-        then
-            echo "Please provide a valid file path"
-        fi
-        echo "Found source code file $app_file..."
-    ;;
     *)
       echo "***************************\n"
       echo "* Error: Invalid argument.*\n"
@@ -208,6 +222,8 @@ do
   shift
 done
 
-get_app_type_and_create_folders $app_file_path
-create_constants_file
 clean_up_temp
+get_app_type_and_create_folders $app_file_path
+write_generic_folder_structure
+create_constants_file
+run_security_scripts_on_application $app_type
