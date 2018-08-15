@@ -42,18 +42,33 @@ SEVERE="Severe"
 MEDIUM="Medium"
 LOW="Low"
 
+#Info plist Constants
+BUNDLE_URL_TYPES_KEY="CFBundleURLTypes"
+BUNDLE_TYPE_ROLE_KEY="CFBundleTypeRole"
+URL_SCHEME_NAMES_KEY="CFBundleURLSchemes"
+APP_TRANSPORT_SECURITY_KEY="NSAppTransportSecurity"
+EXCEPTION_DOMAINS_KEY="NSExceptionDomains"
+
+APP_TRANSPORT_SECURITY_EXPECTED_VALUES={"NSAllowsArbitraryLoads":"NO",
+                                        "NSAllowsArbitraryLoadsForMedia":"NO",
+                                        "NSAllowsArbitraryLoadsInWebContent":"NO",
+                                        "NSAllowsLocalNetworking":"NO"}
+EXCEPTION_DOMAINS_EXPECTED_VALUES={"NSIncludesSubdomains":"NO",
+                                    "NSExceptionAllowsInsecureHTTPLoads":"NO",
+                                    "NSExceptionMinimumTLSVersion":"TLSv1.2 or above",
+                                    "NSExceptionRequiresForwardSecrecy":"YES",
+                                    "NSRequiresCertificateTransparency":"NO"}
 
 
 
- 
-########################################## 
+##########################################
 INPUT_FOLDER = "/Users/digitalsecurity/Desktop/tool_temp/test_run/City2Surf/08_14_2018_15_45_17/input"
 
 APKTOOL_OUTPUT_FOLDER = "/Users/digitalsecurity/Desktop/tool_temp/test_run/City2Surf/08_14_2018_15_45_17/output/apktool"
 
 ENJARIFY_OUTPUT_FOLDER = "/Users/digitalsecurity/Desktop/tool_temp/test_run/City2Surf/08_14_2018_15_45_17/output/enjarify"
 
-LOGS_FOLDER = "/Users/digitalsecurity/Desktop/tool_temp/test_run/City2Surf/08_14_2018_15_45_17/logs"
+LOGS_FOLDER = "/Users/harshith/Desktop/"
 
 REPORT_FOLDER = "/Users/digitalsecurity/Desktop/tool_temp/test_run/City2Surf/08_14_2018_15_45_17/report"
 

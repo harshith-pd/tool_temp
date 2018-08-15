@@ -3,6 +3,7 @@ import subprocess
 import zipfile
 import logging
 import shutil
+import plistlib
 
 import Constants
 from xmltreeDict import *
@@ -329,5 +330,13 @@ def delete_the_contents_of_the_folder(folder):
 #######################################################            iOS Functions          #############################################################
 #######################################################################################################################################################
 
-def get_value_from_plist_for_key(key, plistpath):
-    return execute_shell_command("plistbuddy -c \"Print: {}\" {}".format(key, plistpath))
+def convert_plist_into_a_dictionary(plistpath):
+    plist_into_a_dictionary = {}
+    if os.path.exists(plistpath):
+        with open(plistpath, "rb") as plist_file:
+            plist_into_a_dictionary["plist_dict"] = plistlib.load(plist_file)
+            plist_into_a_dictionary["Successful"] = True
+    else:
+        plist_into_a_dictionary["Successful"] = False
+
+    return plist_into_a_dictionary

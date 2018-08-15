@@ -1,9 +1,8 @@
-<Scenarios>
-  <Scenario>
-    <Tests>
-      <Test1>
-        <title>
-        <ID>
-        <verification_keys>
-        <description>
-        <remediation>
+  <Tests>
+    <Test1>
+      <title>
+      <ID>
+      <verification_type>
+      <verification_keys>
+      <description>
+      <remediation>
