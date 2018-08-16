@@ -77,16 +77,16 @@ clean_up_temp () {
 # return value : none
 #####################################################################################
 get_app_type_and_create_folders () {
-    app_file=$1
-    app_file_extension=${app_file##*.}
+    app_file="$1"
+    app_file_extension="${app_file##*.}"
     if [[ "$app_file_extension" == "ipa" ]]
     then
         app_type="iOS"
-        create_ios_app_instance_folder $app_file
+        create_ios_app_instance_folder "$app_file"
     elif [[ "$app_file_extension" == "apk" ]]
     then
         app_type="Android"
-        create_android_app_instance_folder $app_file
+        create_android_app_instance_folder "$app_file"
     else
         echo "Invalid app file, please input proper file type"
     fi
@@ -98,16 +98,15 @@ get_app_type_and_create_folders () {
 # return value : application name
 #####################################################################################
 get_ios_app_name () {
-    app_file=$1
-    unzip $app_file -d $TMP_FOLDER_LOCATION 2>/dev/null 1>/dev/null || handle_error "App unzip failed"
+    app_file="$1"
+    unzip "$app_file" -d "$TMP_FOLDER_LOCATION" 2>/dev/null 1>/dev/null || handle_error "App unzip failed"
 
     info_plist="${TMP_FOLDER_LOCATION}/Payload/*/Info.plist"
-    app_name=$( defaults read $info_plist CFBundleExecutable )
+    app_name=$( defaults read "$info_plist" CFBundleExecutable )
     if [[ "$app_name" = *"does not exist"* ]]
     then
         echo "App name could not be determined"
     fi
-    app_name=$(echo $app_name | sed "s/ //g")
 
     echo "$app_name"
 }
@@ -118,8 +117,8 @@ get_ios_app_name () {
 # return value : application name
 #####################################################################################
 get_android_app_name () {
-    app_file=$1
-    aapt dump badging $app_file | grep 'application-label:' | sed "s/.*label:'\(.*\)'/\1/" || handle_error "Error in dumping app info"
+    app_file="$1"
+    aapt dump badging "$app_file" | grep 'application-label:' | sed "s/.*label:'\(.*\)'/\1/" || handle_error "Error in dumping app info"
 }
 
 write_generic_folder_structure () {
@@ -128,7 +127,7 @@ write_generic_folder_structure () {
       KEY="${folder_name%%:*}"
       VALUE="${folder_name#*:}"
 
-      echo "$KEY = \"${WORKSPACE}/$VALUE\"\n" >> $TMP_FOLDER_LOCATION/tmp.txt
+      echo "$KEY = \"${WORKSPACE}/$VALUE\"\n" >> "$TMP_FOLDER_LOCATION"/tmp.txt
   done
 }
 
@@ -138,8 +137,9 @@ write_generic_folder_structure () {
 # return value : application name
 #####################################################################################
 create_ios_app_instance_folder () {
-    app_file=$1
-    app_name=$( get_ios_app_name $app_file )
+    app_file="$1"
+    app_name=$( get_ios_app_name "$app_file" )
+    echo "APP_NAME = \"$app_name\"\n" >> "$TMP_FOLDER_LOCATION"/tmp.txt
     date_time=$( date +"%m_%d_%Y_%H_%M_%S" )
 
     for folder_name in "${ios_folder_structure[@]}"
@@ -148,12 +148,11 @@ create_ios_app_instance_folder () {
         VALUE="${folder_name#*:}"
 
         mkdir -p "${TEST_RUN_FOLDER}/$app_name/$date_time/$VALUE" 2>/dev/null 1>/dev/null
-        echo "$KEY = \"${TEST_RUN_FOLDER}/$app_name/$date_time/$VALUE\"\n" >> $TMP_FOLDER_LOCATION/tmp.txt
+        echo "$KEY = \"${TEST_RUN_FOLDER}/$app_name/$date_time/$VALUE\"\n" >> "$TMP_FOLDER_LOCATION"/tmp.txt
     done
-
-    cp -rf ${TMP_FOLDER_LOCATION}/Payload/$app_name.app/* "${TEST_RUN_FOLDER}/$app_name/$date_time/output/"
-    cp -f $app_file "${TEST_RUN_FOLDER}/$app_name/$date_time/input/"
-    cp -f ${WORKSPACE}/config/Config_$app_type.xml "${TEST_RUN_FOLDER}/$app_name/$date_time/config/"
+    cp -rf "${TMP_FOLDER_LOCATION}/Payload/$app_name.app/*" "${TEST_RUN_FOLDER}/$app_name/$date_time/output/"
+    cp -f "$app_file" "${TEST_RUN_FOLDER}/$app_name/$date_time/input/"
+    cp -f "${WORKSPACE}/config/Config_$app_type.xml" "${TEST_RUN_FOLDER}/$app_name/$date_time/config/"
 }
 
 #####################################################################################
@@ -162,8 +161,9 @@ create_ios_app_instance_folder () {
 # return value : application name
 #####################################################################################
 create_android_app_instance_folder () {
-    app_file=$1
-    app_name=$( get_android_app_name $app_file )
+    app_file="$1"
+    app_name=$( get_android_app_name "$app_file" )
+    echo "APP_NAME = \"$app_name\"\n" >> "$TMP_FOLDER_LOCATION"/tmp.txt
     date_time=$( date +"%m_%d_%Y_%H_%M_%S" )
 
     for folder_name in "${android_folder_structure[@]}"
@@ -172,14 +172,14 @@ create_android_app_instance_folder () {
         VALUE="${folder_name#*:}"
 
         mkdir -p "${TEST_RUN_FOLDER}/$app_name/$date_time/$VALUE" 2>/dev/null 1>/dev/null
-        echo "$KEY = \"${TEST_RUN_FOLDER}/$app_name/$date_time/$VALUE\"\n" >> $TMP_FOLDER_LOCATION/tmp.txt
+        echo "$KEY = \"${TEST_RUN_FOLDER}/$app_name/$date_time/$VALUE\"\n" >> "$TMP_FOLDER_LOCATION"/tmp.txt
     done
 
-    cp -f $app_file "${TEST_RUN_FOLDER}/$app_name/$date_time/input/" 2>/dev/null 1>/dev/null
-    cp -f ${WORKSPACE}/config/Config_$app_type.xml "${TEST_RUN_FOLDER}/$app_name/$date_time/config/"
-    $APK_TOOL_COMMAND d -f -o ${TEST_RUN_FOLDER}/$app_name/$date_time/output/apktool $app_file 2>/dev/null 1>/dev/null || handle_error "Error running apktool jar on the apk file"
-    $ENJARIFY_TOOL_COMMAND $app_file -o ${TEST_RUN_FOLDER}/$app_name/$date_time/output/enjarify/$app_name.jar 2>/dev/null 1>/dev/null || handle_error "Error decompiling the apk file"
-    $JDCORE_JAR ${TEST_RUN_FOLDER}/$app_name/$date_time/output/enjarify/$app_name.jar ${TEST_RUN_FOLDER}/$app_name/$date_time/output/enjarify/ 2>/dev/null 1>/dev/null || handle_error "Error decompiling app jar "
+    cp -f "$app_file" "${TEST_RUN_FOLDER}/$app_name/$date_time/input/" 2>/dev/null 1>/dev/null
+    cp -f "${WORKSPACE}/config/Config_$app_type.xml" "${TEST_RUN_FOLDER}/$app_name/$date_time/config/"
+    $APK_TOOL_COMMAND d -f -o "${TEST_RUN_FOLDER}/$app_name/$date_time/output/apktool" "$app_file"  2>/dev/null 1>/dev/null|| handle_error "Error running apktool jar on the apk file"
+    "$ENJARIFY_TOOL_COMMAND" "$app_file" -o "${TEST_RUN_FOLDER}/$app_name/$date_time/output/enjarify/$app_name.jar" 2>/dev/null 1>/dev/null || handle_error "Error decompiling the apk file"
+    $JDCORE_JAR "${TEST_RUN_FOLDER}/$app_name/$date_time/output/enjarify/$app_name.jar" "${TEST_RUN_FOLDER}/$app_name/$date_time/output/enjarify/" 2>/dev/null 1>/dev/null || handle_error "Error decompiling app jar "
 }
 
 #####################################################################################
@@ -189,17 +189,17 @@ create_android_app_instance_folder () {
 #####################################################################################
 create_constants_file () {
     split_delimiter="##########################################"
-    constants_file_contents=$(cat $SCRIPTS_FOLDER/Constants.py)
+    constants_file_contents=$(cat "$SCRIPTS_FOLDER"/Constants.py)
     constants_file_base_contents="${constants_file_contents%%$split_delimiter*}"
     echo "$constants_file_base_contents \n$split_delimiter \n$(cat $TMP_FOLDER_LOCATION/tmp.txt)" > $TMP_FOLDER_LOCATION/tmp_constants.txt
-    mv -f $TMP_FOLDER_LOCATION/tmp_constants.txt $SCRIPTS_FOLDER/Constants.py
+    mv -f "$TMP_FOLDER_LOCATION"/tmp_constants.txt "$SCRIPTS_FOLDER"/Constants.py
 }
 
 run_security_scripts_on_application () {
     current_directory=$(pwd)
-    cd ${WORKSPACE}/Scripts
-    python3 Main_$app_type.py || handle_error "Failure to run the Main script for security tests"
-    cd $current_directory
+    cd "${WORKSPACE}/Scripts"
+    python3 Main_"$app_type".py || handle_error "Failure to run the Main script for security tests"
+    cd "$current_directory"
 }
 ################################## Consume options
 while [ $# -gt 0 ]
@@ -223,7 +223,7 @@ do
 done
 
 clean_up_temp
-get_app_type_and_create_folders $app_file_path
+get_app_type_and_create_folders "$app_file_path"
 write_generic_folder_structure
 create_constants_file
-run_security_scripts_on_application $app_type
+run_security_scripts_on_application "$app_type"

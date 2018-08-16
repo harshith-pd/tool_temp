@@ -60,19 +60,23 @@ EXCEPTION_DOMAINS_EXPECTED_VALUES={"NSIncludesSubdomains":"NO",
                                     "NSRequiresCertificateTransparency":"NO"}
 
 
+ 
+ 
+ 
+########################################## 
+APP_NAME = "ChiMarathon"
 
-##########################################
-INPUT_FOLDER = "/Users/digitalsecurity/Desktop/tool_temp/test_run/City2Surf/08_14_2018_15_45_17/input"
+INPUT_FOLDER = "/Users/digitalsecurity/Desktop/tool_temp/test_run/ChiMarathon/08_16_2018_17_06_13/input"
 
-APKTOOL_OUTPUT_FOLDER = "/Users/digitalsecurity/Desktop/tool_temp/test_run/City2Surf/08_14_2018_15_45_17/output/apktool"
+APKTOOL_OUTPUT_FOLDER = "/Users/digitalsecurity/Desktop/tool_temp/test_run/ChiMarathon/08_16_2018_17_06_13/output/apktool"
 
-ENJARIFY_OUTPUT_FOLDER = "/Users/digitalsecurity/Desktop/tool_temp/test_run/City2Surf/08_14_2018_15_45_17/output/enjarify"
+ENJARIFY_OUTPUT_FOLDER = "/Users/digitalsecurity/Desktop/tool_temp/test_run/ChiMarathon/08_16_2018_17_06_13/output/enjarify"
 
-LOGS_FOLDER = "/Users/harshith/Desktop/"
+LOGS_FOLDER = "/Users/digitalsecurity/Desktop/tool_temp/test_run/ChiMarathon/08_16_2018_17_06_13/logs"
 
-REPORT_FOLDER = "/Users/digitalsecurity/Desktop/tool_temp/test_run/City2Surf/08_14_2018_15_45_17/report"
+REPORT_FOLDER = "/Users/digitalsecurity/Desktop/tool_temp/test_run/ChiMarathon/08_16_2018_17_06_13/report"
 
-CONFIG_FOLDER = "/Users/digitalsecurity/Desktop/tool_temp/test_run/City2Surf/08_14_2018_15_45_17/config"
+CONFIG_FOLDER = "/Users/digitalsecurity/Desktop/tool_temp/test_run/ChiMarathon/08_16_2018_17_06_13/config"
 
 TEST_RUN_FOLDER = "/Users/digitalsecurity/Desktop/tool_temp/test_run"
 
