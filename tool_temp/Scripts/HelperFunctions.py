@@ -60,7 +60,7 @@ def execute_shell_command(command):
             raise Exception(command_execution.stderr)
 
         logging.info("INFO :{} \n OUTPUT:\n{}".format(command_execution.stderr.decode("utf-8").rstrip('\n'),command_execution.stdout.decode("utf-8").rstrip('\n')))
-        return {"INFO":command_execution.stderr.decode("utf-8").rstrip('\n'), "OUTPUT":command_execution.stdout.decode("utf-8").rstrip('\n')}
+        return command_execution.stdout.decode("utf-8").rstrip('\n')
 
     except Exception as error:
         print("Command : {} ,failed with error : {}".format(command, error))
@@ -83,7 +83,7 @@ def execute_shell_command_os_system(command):
             raise Exception(command_execution.stderr)
 
         logging.info("INFO :{} \n OUTPUT:\n{}".format(command_execution.stderr.decode("utf-8").rstrip('\n'),command_execution.stdout.decode("utf-8").rstrip('\n')))
-        return {"INFO":command_execution.stderr.decode("utf-8").rstrip('\n'), "OUTPUT":command_execution.stdout.decode("utf-8").rstrip('\n')}
+        return command_execution.stdout.decode("utf-8").rstrip('\n')
 
     except Exception as error:
         print("Command : {} ,failed with error : {}".format(command, error))

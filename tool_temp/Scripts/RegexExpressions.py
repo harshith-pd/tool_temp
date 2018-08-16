@@ -18,8 +18,27 @@ ALLOW_INTENT_NAVIGATION = 'allow-navigation href="(.*)"'
 #OBFUSCATION FORMATS
 PROGUARD_OBFUSCATION = '\.*f\d*\.'
 
+#Otool RegexExpressions
+CRYPTID = 'cryptid 0'
+STACK = ('___stack_chk_fail', '___stack_chk_guard')
+PIE = 'PIE'
+OBJC = '_objc_release'
+THIRD_PARTY_FRAMEWORKS='@executable_path/.*'
 
+def get_cryptid_regex():
+    return CRYPTID
 
+def get_stack_regex():
+    return STACK
+
+def get_pie_regex():
+    return PIE
+
+def get_objc_regex():
+    return OBJC
+
+def get_third_party_frameworks_regex():
+    return THIRD_PARTY_FRAMEWORKS
 
 def get_permissions_regex():
     return PERMISSIONS_REGEX

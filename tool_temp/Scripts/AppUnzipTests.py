@@ -12,7 +12,7 @@ def check_signing_info(verification_keys=None, original_folder_path=None):
     execution_output_from_shell_command = execute_shell_command(
         "keytool -printcert -file {}/META-INF/CERT.RSA".format(original_folder_path))
 
-    if verification_keys in execution_output_from_shell_command['OUTPUT']:
+    if verification_keys in execution_output_from_shell_command:
         logging.info("App signed using a debug key")
         return "{} found in signing key. App signed using a debug keystore".format(verification_keys)
     else:

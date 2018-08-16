@@ -37,33 +37,37 @@ ACTIVITY = "activity"
 PROVIDER = "provider"
 RECEIVER = "receiver"
 
-#Security Threat levelname
-SEVERE="Severe"
-MEDIUM="Medium"
-LOW="Low"
-
 #Info plist Constants
-BUNDLE_URL_TYPES_KEY="CFBundleURLTypes"
-BUNDLE_TYPE_ROLE_KEY="CFBundleTypeRole"
-URL_SCHEME_NAMES_KEY="CFBundleURLSchemes"
-APP_TRANSPORT_SECURITY_KEY="NSAppTransportSecurity"
-EXCEPTION_DOMAINS_KEY="NSExceptionDomains"
-
-APP_TRANSPORT_SECURITY_EXPECTED_VALUES={"NSAllowsArbitraryLoads":"NO",
+#url schemes
+BUNDLE_URL_TYPES_KEY = "CFBundleURLTypes"
+BUNDLE_TYPE_ROLE_KEY = "CFBundleTypeRole"
+URL_SCHEME_NAMES_KEY = "CFBundleURLSchemes"
+APP_TRANSPORT_SECURITY_KEY = "NSAppTransportSecurity"
+EXCEPTION_DOMAINS_KEY = "NSExceptionDomains"
+#ATS
+APP_TRANSPORT_SECURITY_EXPECTED_VALUES = {"NSAllowsArbitraryLoads":"NO",
                                         "NSAllowsArbitraryLoadsForMedia":"NO",
                                         "NSAllowsArbitraryLoadsInWebContent":"NO",
                                         "NSAllowsLocalNetworking":"NO"}
-EXCEPTION_DOMAINS_EXPECTED_VALUES={"NSIncludesSubdomains":"NO",
+EXCEPTION_DOMAINS_EXPECTED_VALUES = {"NSIncludesSubdomains":"NO",
                                     "NSExceptionAllowsInsecureHTTPLoads":"NO",
                                     "NSExceptionMinimumTLSVersion":"TLSv1.2 or above",
                                     "NSExceptionRequiresForwardSecrecy":"YES",
                                     "NSRequiresCertificateTransparency":"NO"}
+#Execution constants
+#keys
+SEVERITY = "SEVERITY"
+STATUS = "STATUS"
+EXECUTION_OUTPUT = "EXECUTION_OUTPUT"
+#values
+PASS = "PASS"
+FAIL = "FAIL"
+#Security Threat levelname
+SEVERE = "Severe"
+MEDIUM = "Medium"
+LOW = "Low"
 
-
- 
- 
- 
-########################################## 
+##########################################
 APP_NAME = "ChiMarathon"
 
 INPUT_FOLDER = "/Users/digitalsecurity/Desktop/tool_temp/test_run/ChiMarathon/08_16_2018_17_06_13/input"
