@@ -1,0 +1,38 @@
+PHONE NUMBER: 4085559080
+REG CODE: xxxxx
+RTL: no
+LANGUAGE: en
+LOCALE: en-EN
++PRINT StartingRegister
+
++SSNAME REGISTER
++PRINT StartingRegister
+
+# Welcome screen
++TakeScreenshot
++Delay 1
+Agree & Continue
+
+# Verify number
++SuppressAlertTap true
++TypePhoneNumber
+Done
++Delay 5
+Yes
++Delay 10
++TypeRegCode
++Delay 5
+
+# Skip iCloud restore
++TakeScreenshot
++Delay 1
++LeftButton
+Skip Restore
++SuppressAlertTap false
+
+# Profile section
++TakeScreenshot
++Delay 1
+Your name (for notifications)
++Type Jack
+Done

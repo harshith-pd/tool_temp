@@ -45,15 +45,16 @@ URL_SCHEME_NAMES_KEY = "CFBundleURLSchemes"
 APP_TRANSPORT_SECURITY_KEY = "NSAppTransportSecurity"
 EXCEPTION_DOMAINS_KEY = "NSExceptionDomains"
 #ATS
-APP_TRANSPORT_SECURITY_EXPECTED_VALUES = {"NSAllowsArbitraryLoads":"NO",
-                                        "NSAllowsArbitraryLoadsForMedia":"NO",
-                                        "NSAllowsArbitraryLoadsInWebContent":"NO",
-                                        "NSAllowsLocalNetworking":"NO"}
-EXCEPTION_DOMAINS_EXPECTED_VALUES = {"NSIncludesSubdomains":"NO",
-                                    "NSExceptionAllowsInsecureHTTPLoads":"NO",
-                                    "NSExceptionMinimumTLSVersion":"TLSv1.2 or above",
-                                    "NSExceptionRequiresForwardSecrecy":"YES",
-                                    "NSRequiresCertificateTransparency":"NO"}
+APP_TRANSPORT_SECURITY_EXPECTED_VALUES = {"NSAllowsArbitraryLoads":False,
+                                        "NSAllowsArbitraryLoadsForMedia":False,
+                                        "NSAllowsArbitraryLoadsInWebContent":False,
+                                        "NSAllowsLocalNetworking":False,
+                                        "NSIncludesSubdomains":False,
+                                        "NSExceptionAllowsInsecureHTTPLoads":False,
+                                        "NSExceptionMinimumTLSVersion":"TLSv1.2 or above",
+                                        "NSExceptionRequiresForwardSecrecy":True,
+                                        "NSRequiresCertificateTransparency":False,
+                                        "NSExceptionDomains":""}
 #Execution constants
 #keys
 SEVERITY = "SEVERITY"
@@ -67,27 +68,38 @@ SEVERE = "Severe"
 MEDIUM = "Medium"
 LOW = "Low"
 
-##########################################
-APP_NAME = "ChiMarathon"
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+########################################## 
+APP_NAME = "WhatsApp"
 
-INPUT_FOLDER = "/Users/digitalsecurity/Desktop/tool_temp/test_run/ChiMarathon/08_16_2018_17_06_13/input"
+INPUT_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/WhatsApp/08_17_2018_14_11_11/input"
 
-APKTOOL_OUTPUT_FOLDER = "/Users/digitalsecurity/Desktop/tool_temp/test_run/ChiMarathon/08_16_2018_17_06_13/output/apktool"
+OUTPUT_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/WhatsApp/08_17_2018_14_11_11/output"
 
-ENJARIFY_OUTPUT_FOLDER = "/Users/digitalsecurity/Desktop/tool_temp/test_run/ChiMarathon/08_16_2018_17_06_13/output/enjarify"
+LOGS_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/WhatsApp/08_17_2018_14_11_11/logs"
 
-LOGS_FOLDER = "/Users/digitalsecurity/Desktop/tool_temp/test_run/ChiMarathon/08_16_2018_17_06_13/logs"
+REPORT_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/WhatsApp/08_17_2018_14_11_11/report"
 
-REPORT_FOLDER = "/Users/digitalsecurity/Desktop/tool_temp/test_run/ChiMarathon/08_16_2018_17_06_13/report"
+CONFIG_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/WhatsApp/08_17_2018_14_11_11/config"
 
-CONFIG_FOLDER = "/Users/digitalsecurity/Desktop/tool_temp/test_run/ChiMarathon/08_16_2018_17_06_13/config"
+TEST_RUN_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run"
 
-TEST_RUN_FOLDER = "/Users/digitalsecurity/Desktop/tool_temp/test_run"
+CONFIG_ROOT_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/config"
 
-CONFIG_ROOT_FOLDER = "/Users/digitalsecurity/Desktop/tool_temp/config"
+SCRIPTS_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/Scripts"
 
-SCRIPTS_FOLDER = "/Users/digitalsecurity/Desktop/tool_temp/Scripts"
+TOOLS_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/Tools"
 
-TOOLS_FOLDER = "/Users/digitalsecurity/Desktop/tool_temp/Tools"
-
-TMP_FOLDER = "/Users/digitalsecurity/Desktop/tool_temp/.tmp"
+TMP_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/.tmp"

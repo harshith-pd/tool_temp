@@ -19,7 +19,6 @@ test_result = {}
 for test_component in xml_dict.keys():
     if TestComponents.APP_UNZIP.value in test_component:
         test_result = execute_tests(xml_dict[TestComponents.APP_UNZIP.value]['Test'])
-        print (test_result)
     elif TestComponents.DEX_TO_JAR.value in test_component:
         pass
     else:

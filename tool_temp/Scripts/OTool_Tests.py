@@ -79,14 +79,14 @@ def third_party_frameworks_check (executable_file_path = None):
     return execution_result
 
 
-PATH="/Users/harshith/Desktop/python/pythonFiles/tempdir/Whatsapp/Payload/WhatsApp.app/WhatsApp"
-execution_result = cryptid_check(PATH)
-print (f"cryptid  :  {execution_result}")
-execution_result = stack_smash_protection_check(PATH)
-print (f"stack_smash_protection_check  :  {execution_result}")
-execution_result = pie_flag_check(PATH)
-print (f"pie_flag_check  :  {execution_result}")
-execution_result = objc_release_flag_check(PATH)
-print (f"objc_release_flag_check  :  {execution_result}")
-execution_result = third_party_frameworks_check(PATH)
-print (f"third_party_frameworks_check  :  {execution_result}")
+# PATH="/Users/harshith/Desktop/python/pythonFiles/tempdir/Whatsapp/Payload/WhatsApp.app/WhatsApp"
+# execution_result = cryptid_check(PATH)
+# print (f"cryptid  :  {execution_result}")
+# execution_result = stack_smash_protection_check(PATH)
+# print (f"stack_smash_protection_check  :  {execution_result}")
+# execution_result = pie_flag_check(PATH)
+# print (f"pie_flag_check  :  {execution_result}")
+# execution_result = objc_release_flag_check(PATH)
+# print (f"objc_release_flag_check  :  {execution_result}")
+# execution_result = third_party_frameworks_check(PATH)
+# print (f"third_party_frameworks_check  :  {execution_result}")

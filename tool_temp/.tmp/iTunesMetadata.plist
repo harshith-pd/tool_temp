@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UIRequiredDeviceCapabilities</key>
+	<dict>
+		<key>telephony</key>
+		<true/>
+	</dict>
+	<key>appleId</key>
+	<string>Ghay@cracked.by</string>
+	<key>purchaseDate</key>
+	<date>2016-09-09T09:09:09Z</date>
+	<key>artistId</key>
+	<integer>310634000</integer>
+	<key>artistName</key>
+	<string>WhatsApp Inc.</string>
+	<key>bundleDisplayName</key>
+	<string>WhatsApp</string>
+	<key>bundleShortVersionString</key>
+	<string>2.18.70</string>
+	<key>bundleVersion</key>
+	<string>2.18.70.33</string>
+	<key>copyright</key>
+	<string>© 2018 WhatsApp Inc.</string>
+	<key>drmVersionNumber</key>
+	<integer>0</integer>
+	<key>fileExtension</key>
+	<string>.app</string>
+	<key>gameCenterEnabled</key>
+	<false/>
+	<key>gameCenterEverEnabled</key>
+	<false/>
+	<key>genre</key>
+	<string>Social Networking</string>
+	<key>genreId</key>
+	<integer>6005</integer>
+	<key>itemId</key>
+	<integer>310633997</integer>
+	<key>itemName</key>
+	<string>WhatsApp Messenger</string>
+	<key>kind</key>
+	<string>software</string>
+	<key>playlistName</key>
+	<string>WhatsApp Inc.</string>
+	<key>product-type</key>
+	<string>ios-app</string>
+	<key>rating</key>
+	<dict>
+		<key>content</key>
+		<string>Infrequent/Mild Profanity or Crude Humour , Infrequent/Mild Mature/Suggestive Themes , Advisory.NO.UNRESTRICTED_WEB_ACCESS , Infrequent/Mild Medical/Treatment Information , Infrequent/Mild Horror/Fear Themes and Advisory.NO.GAMBLING_CONTESTS</string>
+		<key>label</key>
+		<string>12+</string>
+		<key>rank</key>
+		<integer>300</integer>
+		<key>system</key>
+		<string>itunes-games</string>
+	</dict>
+	<key>releaseDate</key>
+	<string>2009-05-04T02:43:49Z</string>
+	<key>s</key>
+	<integer>143444</integer>
+	<key>softwareIcon57x57URL</key>
+	<string>http://a48.phobos.apple.com/us/r30/Purple115/v4/28/1c/0d/281c0d96-344a-ab26-74b6-0bc9776df011/icon114x114.png</string>
+	<key>softwareIconNeedsShine</key>
+	<false/>
+	<key>softwareSupportedDeviceIds</key>
+	<array>
+		<integer>2</integer>
+	</array>
+	<key>softwareVersionBundleId</key>
+	<string>net.whatsapp.WhatsApp</string>
+	<key>softwareVersionExternalIdentifier</key>
+	<integer>827504094</integer>
+	<key>softwareVersionExternalIdentifiers</key>
+	<array>
+		<integer>820600860</integer>
+		<integer>820662855</integer>
+		<integer>820705286</integer>
+		<integer>820818759</integer>
+		<integer>820944514</integer>
+		<integer>820979844</integer>
+		<integer>821109912</integer>
+		<integer>821370510</integer>
+		<integer>821468932</integer>
+		<integer>821811363</integer>
+		<integer>821863223</integer>
+		<integer>821978779</integer>
+		<integer>822305231</integer>
+		<integer>822499687</integer>
+		<integer>822858834</integer>
+		<integer>822939175</integer>
+		<integer>823057182</integer>
+		<integer>823217540</integer>
+		<integer>823384344</integer>
+		<integer>823445370</integer>
+		<integer>823582708</integer>
+		<integer>823920081</integer>
+		<integer>824002271</integer>
+		<integer>824160066</integer>
+		<integer>824217832</integer>
+		<integer>824428010</integer>
+		<integer>825080017</integer>
+		<integer>825503088</integer>
+		<integer>825571373</integer>
+		<integer>825669582</integer>
+		<integer>825765201</integer>
+		<integer>825830186</integer>
+		<integer>825899964</integer>
+		<integer>826078875</integer>
+		<integer>826210846</integer>
+		<integer>826470293</integer>
+		<integer>826573272</integer>
+		<integer>826881452</integer>
+		<integer>827080991</integer>
+		<integer>827213165</integer>
+		<integer>827269178</integer>
+		<integer>827504094</integer>
+	</array>
+	<key>vendorId</key>
+	<integer>217218</integer>
+	<key>versionRestrictions</key>
+	<integer>16843008</integer>
+</dict>
+</plist>
+

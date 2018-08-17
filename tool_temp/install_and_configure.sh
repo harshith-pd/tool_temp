@@ -31,7 +31,7 @@
 #     usage="$(basename "$0") -input_app_file=<input file location> -input_source_code=<input source code>"
      usage="$(basename "$0") -input_app_file=<input file location>"
 
-     WORKSPACE="$HOME/Desktop/tool_temp"
+     WORKSPACE="$HOME/Desktop/security_tool/tool_temp"
      TMP_FOLDER_LOCATION="${WORKSPACE}/.tmp"
      SCRIPTS_FOLDER="${WORKSPACE}/Scripts"
      TOOLS_FOLDER="${WORKSPACE}/Tools"
@@ -68,6 +68,7 @@ handle_error () {
 # return value : -
 #####################################################################################
 clean_up_temp () {
+    mkdir -p "$TMP_FOLDER_LOCATION"
     rm -rf "$TMP_FOLDER_LOCATION"/*
 }
 
@@ -101,7 +102,7 @@ get_ios_app_name () {
     app_file="$1"
     unzip "$app_file" -d "$TMP_FOLDER_LOCATION" 2>/dev/null 1>/dev/null || handle_error "App unzip failed"
 
-    info_plist="${TMP_FOLDER_LOCATION}/Payload/*/Info.plist"
+    info_plist=$(ls ${TMP_FOLDER_LOCATION}/Payload/*.app/Info.plist)
     app_name=$( defaults read "$info_plist" CFBundleExecutable )
     if [[ "$app_name" = *"does not exist"* ]]
     then
@@ -118,7 +119,7 @@ get_ios_app_name () {
 #####################################################################################
 get_android_app_name () {
     app_file="$1"
-    aapt dump badging "$app_file" | grep 'application-label:' | sed "s/.*label:'\(.*\)'/\1/" || handle_error "Error in dumping app info"
+    $TOOLS_FOLDER/aapt dump badging "$app_file" | grep 'application-label:' | sed "s/.*label:'\(.*\)'/\1/" || handle_error "Error in dumping app info"
 }
 
 write_generic_folder_structure () {
@@ -150,7 +151,8 @@ create_ios_app_instance_folder () {
         mkdir -p "${TEST_RUN_FOLDER}/$app_name/$date_time/$VALUE" 2>/dev/null 1>/dev/null
         echo "$KEY = \"${TEST_RUN_FOLDER}/$app_name/$date_time/$VALUE\"\n" >> "$TMP_FOLDER_LOCATION"/tmp.txt
     done
-    cp -rf "${TMP_FOLDER_LOCATION}/Payload/$app_name.app/*" "${TEST_RUN_FOLDER}/$app_name/$date_time/output/"
+
+    cp -r "${TMP_FOLDER_LOCATION}/Payload/$app_name.app/" "${TEST_RUN_FOLDER}/$app_name/$date_time/output/"
     cp -f "$app_file" "${TEST_RUN_FOLDER}/$app_name/$date_time/input/"
     cp -f "${WORKSPACE}/config/Config_$app_type.xml" "${TEST_RUN_FOLDER}/$app_name/$date_time/config/"
 }
