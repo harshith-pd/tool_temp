@@ -9,7 +9,6 @@ import Constants
 def cryptid_check (executable_file_path = None):
     execution_result = {Constants.STATUS:Constants.PASS, Constants.EXECUTION_OUTPUT:"\n"}
     cryptography_info = execute_shell_command(f"otool -l {executable_file_path}")
-    cryptography_info = execute_shell_command(f"grep crypt {cryptography_info}")
     crypto_regex = re.compile(get_cryptid_regex())
     cryptid_entries = crypto_regex.findall(cryptography_info)
     if len(cryptid_entries) == 0:
