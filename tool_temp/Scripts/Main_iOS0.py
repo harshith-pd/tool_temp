@@ -29,6 +29,7 @@ config_xml_dict = parse_xml_to_dict("{}/{}".format(Constants.CONFIG_FOLDER, 'Con
 for test_name in config_xml_dict.keys():
     test_dict = config_xml_dict[test_name]
     execution_result = {}
+    print (test_dict)
     logging.info(f"Execution Test - {test_dict['title']}\n")
     if test_dict['verification_type'] == "plist":
         execution_result = globals()[test_dict['test_function']](INFO_PLIST_PATH)
@@ -40,6 +41,6 @@ for test_name in config_xml_dict.keys():
     logging.info(f"{execution_result[Constants.STATUS]}\n")
     test_dict['test_result'] = execution_result[Constants.STATUS]
     logging.info(f"{execution_result[Constants.EXECUTION_OUTPUT]}\n")
-    test_dict['test_findings'] = execution_result[Constants.EXECUTION_OUTPUT]
+    test_dict['test_findings'] = execution_result[Constants.STATUS]
 
 print (config_xml_dict)
