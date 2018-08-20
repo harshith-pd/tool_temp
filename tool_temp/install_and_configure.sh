@@ -73,6 +73,46 @@ clean_up_temp () {
 }
 
 #####################################################################################
+# function desc : check for java installation and the version
+# arguments : none
+# return value : none
+#####################################################################################
+check_if_java_installed() {
+   execution_output="$( java -version 2>&1 | head -n 1 )"
+   if [[ "$execution_output" = *"$error_string"* ]]
+   then
+       echo "Java is not installed on the machine or not configured to path" && handle_error "$execution_output"
+   else
+       echo "$execution_output is installed on system"
+       if [[ ( "$execution_output" = *"1.5"* ) || ( "$execution_output" = *"1.6"* ) || ( "$execution_output" = *"1.7"* ) ]]
+       then
+            handle_error "Please install java version greater than or equal to 1.8.*"
+       fi
+   fi
+}
+
+#####################################################################################
+# function desc : check for python installation and the version
+# arguments : none
+# return value : boolean, string
+#####################################################################################
+check_if_python_installed() {
+    generic_python_executables=( "python" "python3" )
+
+    for python_executable in "${generic_python_executables[@]}"
+    do
+        echo "Checking for ${python_executable}..."
+        execution_output="$( $python_executable -V 2>&1 )"
+        if [[ "$execution_output" = *"$error_string"* ]]
+        then
+            echo "${python_executable} is a pre-requisite. Its either not installed or not in path." && handle_error "$execution_output"
+        else
+            echo "$execution_output version of python is installed on system"
+        fi
+    done
+}
+
+#####################################################################################
 # function desc : get the type of the app given as input for evaluation
 # arguments : input application file
 # return value : none
@@ -225,6 +265,8 @@ do
 done
 
 clean_up_temp
+check_if_java_installed
+check_if_python_installed
 get_app_type_and_create_folders "$app_file_path"
 write_generic_folder_structure
 create_constants_file

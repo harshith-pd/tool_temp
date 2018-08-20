@@ -82,18 +82,19 @@ LOW = "Low"
  
  
  
+ 
 ########################################## 
 APP_NAME = "WhatsApp"
 
-INPUT_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/WhatsApp/08_20_2018_12_11_04/input"
+INPUT_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/WhatsApp/08_20_2018_12_55_23/input"
 
-OUTPUT_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/WhatsApp/08_20_2018_12_11_04/output"
+OUTPUT_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/WhatsApp/08_20_2018_12_55_23/output"
 
-LOGS_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/WhatsApp/08_20_2018_12_11_04/logs"
+LOGS_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/WhatsApp/08_20_2018_12_55_23/logs"
 
-REPORT_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/WhatsApp/08_20_2018_12_11_04/report"
+REPORT_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/WhatsApp/08_20_2018_12_55_23/report"
 
-CONFIG_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/WhatsApp/08_20_2018_12_11_04/config"
+CONFIG_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/WhatsApp/08_20_2018_12_55_23/config"
 
 TEST_RUN_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run"
 
