@@ -86,18 +86,19 @@ LOW = "Low"
  
  
  
+ 
 ########################################## 
 APP_NAME = "Instagram"
 
-INPUT_FOLDER = "/Users/digitalsecurity/Documents/tool/tool_temp/test_run/Instagram/08_20_2018_14_10_29/input"
+INPUT_FOLDER = "/Users/digitalsecurity/Documents/tool/tool_temp/test_run/Instagram/08_20_2018_14_55_48/input"
 
-OUTPUT_FOLDER = "/Users/digitalsecurity/Documents/tool/tool_temp/test_run/Instagram/08_20_2018_14_10_29/output"
+OUTPUT_FOLDER = "/Users/digitalsecurity/Documents/tool/tool_temp/test_run/Instagram/08_20_2018_14_55_48/output"
 
-LOGS_FOLDER = "/Users/digitalsecurity/Documents/tool/tool_temp/test_run/Instagram/08_20_2018_14_10_29/logs"
+LOGS_FOLDER = "/Users/digitalsecurity/Documents/tool/tool_temp/test_run/Instagram/08_20_2018_14_55_48/logs"
 
-REPORT_FOLDER = "/Users/digitalsecurity/Documents/tool/tool_temp/test_run/Instagram/08_20_2018_14_10_29/report"
+REPORT_FOLDER = "/Users/digitalsecurity/Documents/tool/tool_temp/test_run/Instagram/08_20_2018_14_55_48/report"
 
-CONFIG_FOLDER = "/Users/digitalsecurity/Documents/tool/tool_temp/test_run/Instagram/08_20_2018_14_10_29/config"
+CONFIG_FOLDER = "/Users/digitalsecurity/Documents/tool/tool_temp/test_run/Instagram/08_20_2018_14_55_48/config"
 
 TEST_RUN_FOLDER = "/Users/digitalsecurity/Documents/tool/tool_temp/test_run"
 

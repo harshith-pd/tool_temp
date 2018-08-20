@@ -35,3 +35,34 @@ for test_name in config_xml_dict.keys():
     test_dict['test_findings'] = execution_result[Constants.EXECUTION_OUTPUT]
 
 print (config_xml_dict)
+f = open('report.html','w')
+message = "<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'><div class='container'>"
+message += "<table class='table table-bordered'>"
+message += "<tr>"
+count = 0
+for key,values in config_xml_dict.items():
+    if count > 1:
+        break
+    for k in values.keys():
+        message += "<td>" + k + "</td>"
+        count += 1
+print(message)
+
+message += "</tr>"
+for key,values in config_xml_dict.items():
+    message = message + "<tr>"
+    for k,v in values.items():
+        try:
+            message += "<td>" + values[k] + "</td>"
+            # message += "<td>" + values['description'] + "</td>"
+            # message += "<td>" + values['test_result'] + "</td>"
+            # message += "<td>" + values['test_findings'] + "</td>"
+            # message += "<td>" + values['remediation'] + "</td>"
+        except TypeError:
+            message += "<td></td>"
+    message = message + "</tr>"
+message = message + "</div></table>"
+f.write(message)
+f.close()
+
+
