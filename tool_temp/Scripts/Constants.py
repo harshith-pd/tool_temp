@@ -83,25 +83,28 @@ LOW = "Low"
  
  
  
+ 
+ 
+ 
 ########################################## 
-APP_NAME = "WhatsApp"
+APP_NAME = "Instagram"
 
-INPUT_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/WhatsApp/08_20_2018_12_55_23/input"
+INPUT_FOLDER = "/Users/digitalsecurity/Documents/tool/tool_temp/test_run/Instagram/08_20_2018_14_10_29/input"
 
-OUTPUT_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/WhatsApp/08_20_2018_12_55_23/output"
+OUTPUT_FOLDER = "/Users/digitalsecurity/Documents/tool/tool_temp/test_run/Instagram/08_20_2018_14_10_29/output"
 
-LOGS_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/WhatsApp/08_20_2018_12_55_23/logs"
+LOGS_FOLDER = "/Users/digitalsecurity/Documents/tool/tool_temp/test_run/Instagram/08_20_2018_14_10_29/logs"
 
-REPORT_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/WhatsApp/08_20_2018_12_55_23/report"
+REPORT_FOLDER = "/Users/digitalsecurity/Documents/tool/tool_temp/test_run/Instagram/08_20_2018_14_10_29/report"
 
-CONFIG_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/WhatsApp/08_20_2018_12_55_23/config"
+CONFIG_FOLDER = "/Users/digitalsecurity/Documents/tool/tool_temp/test_run/Instagram/08_20_2018_14_10_29/config"
 
-TEST_RUN_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run"
+TEST_RUN_FOLDER = "/Users/digitalsecurity/Documents/tool/tool_temp/test_run"
 
-CONFIG_ROOT_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/config"
+CONFIG_ROOT_FOLDER = "/Users/digitalsecurity/Documents/tool/tool_temp/config"
 
-SCRIPTS_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/Scripts"
+SCRIPTS_FOLDER = "/Users/digitalsecurity/Documents/tool/tool_temp/Scripts"
 
-TOOLS_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/Tools"
+TOOLS_FOLDER = "/Users/digitalsecurity/Documents/tool/tool_temp/Tools"
 
-TMP_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/.tmp"
+TMP_FOLDER = "/Users/digitalsecurity/Documents/tool/tool_temp/.tmp"

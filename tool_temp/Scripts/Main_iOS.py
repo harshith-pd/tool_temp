@@ -17,14 +17,6 @@ INFO_PLIST_PATH = f"{Constants.OUTPUT_FOLDER}/Info.plist"
 APP_EXECUTABLE_PATH = f"{Constants.OUTPUT_FOLDER}/{Constants.APP_NAME}"
 
 config_xml_dict = parse_xml_to_dict("{}/{}".format(Constants.CONFIG_FOLDER, 'Config_iOS.xml'))
-# test_dict = {"check_for_app_transport_security":"plist",
-#                 "check_for_declared_URL_schemes":"plist",
-#                 "cryptid_check":"executable",
-#                 "stack_smash_protection_check":"executable",
-#                 "pie_flag_check":"executable",
-#                 "objc_release_flag_check":"executable",
-#                 "third_party_frameworks_check":"executable",
-#                 }
 
 for test_name in config_xml_dict.keys():
     test_dict = config_xml_dict[test_name]

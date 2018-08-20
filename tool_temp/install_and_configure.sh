@@ -31,7 +31,7 @@
 #     usage="$(basename "$0") -input_app_file=<input file location> -input_source_code=<input source code>"
      usage="$(basename "$0") -input_app_file=<input file location>"
 
-     WORKSPACE="$HOME/Desktop/security_tool/tool_temp"
+     WORKSPACE="$HOME/Documents/tool/tool_temp"
      TMP_FOLDER_LOCATION="${WORKSPACE}/.tmp"
      SCRIPTS_FOLDER="${WORKSPACE}/Scripts"
      TOOLS_FOLDER="${WORKSPACE}/Tools"
@@ -192,7 +192,7 @@ create_ios_app_instance_folder () {
         echo "$KEY = \"${TEST_RUN_FOLDER}/$app_name/$date_time/$VALUE\"\n" >> "$TMP_FOLDER_LOCATION"/tmp.txt
     done
 
-    cp -r "${TMP_FOLDER_LOCATION}/Payload/$app_name.app/" "${TEST_RUN_FOLDER}/$app_name/$date_time/output/"
+    cp -r ${TMP_FOLDER_LOCATION}/Payload/*.app/ ${TEST_RUN_FOLDER}/$app_name/$date_time/output/
     cp -f "$app_file" "${TEST_RUN_FOLDER}/$app_name/$date_time/input/"
     cp -f "${WORKSPACE}/config/Config_$app_type.xml" "${TEST_RUN_FOLDER}/$app_name/$date_time/config/"
 }
