@@ -56,10 +56,6 @@ APP_TRANSPORT_SECURITY_EXPECTED_VALUES = {"NSAllowsArbitraryLoads":False,
                                         "NSRequiresCertificateTransparency":False,
                                         "NSExceptionDomains":""}
 #Execution constants
-#keys
-SEVERITY = "SEVERITY"
-STATUS = "STATUS"
-EXECUTION_OUTPUT = "EXECUTION_OUTPUT"
 #values
 PASS = "PASS"
 FAIL = "FAIL"
@@ -68,44 +64,78 @@ SEVERE = "Severe"
 MEDIUM = "Medium"
 LOW = "Low"
 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-########################################## 
-APP_NAME = "Instagram"
+#Report keys
+TITLE="title"
+DESCRIPTION="description"
+REMEDIATION="remediation"
+SEVERITY = "severity"
+STATUS = "test_result"
+EXECUTION_OUTPUT = "test_findings"
+REPORT_BOILER_PLATE_BEGINNING = f"""
+            <!DOCTYPE html>
+            <html>
+            <head>
+            <style>
+            table, th, td {{
+                border: 1px solid black;
+            }}
+            </style>
+            </head>
+            <body>
+            <table class='table table-bordered'>
+            <tr>
+            <th>{TITLE.replace('_',' ')}</th>
+            <th>{DESCRIPTION.replace('_',' ')}</th>
+            <th>{SEVERITY.replace('_',' ')}</th>
+            <th>{STATUS.replace('_',' ')}</th>
+            <th>{EXECUTION_OUTPUT.replace('_',' ')}</th>
+            <th>{REMEDIATION.replace('_',' ')}</th>
+            </tr>
+            """
+REPORT_BOILER_PLATE_ENDING = f"""</tr>
+                            </table>
+                            </body>
+                            </html>
+                            """
+REPORT_KEYS = (TITLE, DESCRIPTION, SEVERITY, STATUS, EXECUTION_OUTPUT, REMEDIATION)
 
-INPUT_FOLDER = "/Users/digitalsecurity/Documents/tool/tool_temp/test_run/Instagram/08_20_2018_14_55_48/input"
 
-OUTPUT_FOLDER = "/Users/digitalsecurity/Documents/tool/tool_temp/test_run/Instagram/08_20_2018_14_55_48/output"
 
-LOGS_FOLDER = "/Users/digitalsecurity/Documents/tool/tool_temp/test_run/Instagram/08_20_2018_14_55_48/logs"
 
-REPORT_FOLDER = "/Users/digitalsecurity/Documents/tool/tool_temp/test_run/Instagram/08_20_2018_14_55_48/report"
 
-CONFIG_FOLDER = "/Users/digitalsecurity/Documents/tool/tool_temp/test_run/Instagram/08_20_2018_14_55_48/config"
 
-TEST_RUN_FOLDER = "/Users/digitalsecurity/Documents/tool/tool_temp/test_run"
 
-CONFIG_ROOT_FOLDER = "/Users/digitalsecurity/Documents/tool/tool_temp/config"
 
-SCRIPTS_FOLDER = "/Users/digitalsecurity/Documents/tool/tool_temp/Scripts"
 
-TOOLS_FOLDER = "/Users/digitalsecurity/Documents/tool/tool_temp/Tools"
 
-TMP_FOLDER = "/Users/digitalsecurity/Documents/tool/tool_temp/.tmp"
+
+
+
+
+
+
+
+
+
+##########################################
+APP_NAME = "WhatsApp"
+
+INPUT_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/WhatsApp/08_21_2018_12_13_08/input"
+
+OUTPUT_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/WhatsApp/08_21_2018_12_13_08/output"
+
+LOGS_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/WhatsApp/08_21_2018_12_13_08/logs"
+
+REPORT_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/WhatsApp/08_21_2018_12_13_08/report"
+
+CONFIG_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/WhatsApp/08_21_2018_12_13_08/config"
+
+TEST_RUN_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run"
+
+CONFIG_ROOT_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/config"
+
+SCRIPTS_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/Scripts"
+
+TOOLS_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/Tools"
+
+TMP_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/.tmp"

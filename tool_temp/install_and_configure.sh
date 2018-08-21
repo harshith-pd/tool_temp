@@ -31,7 +31,7 @@
 #     usage="$(basename "$0") -input_app_file=<input file location> -input_source_code=<input source code>"
      usage="$(basename "$0") -input_app_file=<input file location>"
 
-     WORKSPACE="$HOME/Documents/tool/tool_temp"
+     WORKSPACE="$HOME/Desktop/security_tool/tool_temp"
      TMP_FOLDER_LOCATION="${WORKSPACE}/.tmp"
      SCRIPTS_FOLDER="${WORKSPACE}/Scripts"
      TOOLS_FOLDER="${WORKSPACE}/Tools"

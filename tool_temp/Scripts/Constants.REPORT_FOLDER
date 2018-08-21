@@ -1,0 +1,56 @@
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'><div class='container'>
+            <table class='table table-bordered'>
+            <tr>
+            <td>title</td>
+            <td>description</td>
+            <td>severity</td>
+            <td>test_result</td>
+            <td>test_findings</td>
+            <td>remediation</td>
+            </tr>
+            <td>check for app transport security</td><td>-</td><td>MEDIUM</td><td>FAIL</td><td>
+NSAllowsArbitraryLoads is set to True.
+Expected value is False</td><td>-</td><td>check for declared URL schemes</td><td>-</td><td>LOW</td><td>FAIL</td><td>
+Bundle type role is set as :Editor, for URL schemes:
+-upi
+-whatsapp
+Please ensure that the URL schemes are validated in the canOpenURL app-delegate method
+</td><td>-</td><td>cryptid check</td><td>-</td><td>MEDIUM</td><td>FAIL</td><td>
+cryptid 0 found. This application is not encrypted
+cryptid 0 found. This application is not encrypted
+</td><td>-</td><td>stack smash protection check</td><td>-</td><td>LOW</td><td>PASS</td><td>
+   stack chk fail flag found in binary
+   stack chk guard flag found in binary
+</td><td>-</td><td>pie flag check</td><td>-</td><td>LOW</td><td>PASS</td><td>
+PIE found.
+</td><td>-</td><td>objc release flag check</td><td>-</td><td>LOW</td><td>PASS</td><td>
+ objc release found.
+</td><td>-</td><td>third party frameworks check</td><td>-</td><td>LOW</td><td>FAIL</td><td>
+Following are the third party frameworks found:
+-pptweak.dylib (compatibility version 0.0.0, current version 0.0.0)
+-libuasharedtoolscloudmobi.dylib (compatibility version 0.0.0, current version 0.0.0)
+-libuasharedtoolsapplovin.dylib (compatibility version 0.0.0, current version 0.0.0)
+-libuasharedanaltyicsflurry.dylib (compatibility version 0.0.0, current version 0.0.0)
+-libuasharedtoolsinmobi.dylib (compatibility version 0.0.0, current version 0.0.0)
+-libuasharedtoolsappnext.dylib (compatibility version 0.0.0, current version 0.0.0)
+-libuasharedtoolsmobvista.dylib (compatibility version 0.0.0, current version 0.0.0)
+-CrackPlus.dylib (compatibility version 0.0.0, current version 0.0.0)
+-libuasharedtools.dylib (compatibility version 0.0.0, current version 0.0.0)
+-libuasharedanaltyics.dylib (compatibility version 0.0.0, current version 0.0.0)
+-libuasharedtoolsfacebook.dylib (compatibility version 0.0.0, current version 0.0.0)
+-libuasharedtoolsgoogle.dylib (compatibility version 0.0.0, current version 0.0.0)
+-pptweak.dylib (compatibility version 0.0.0, current version 0.0.0)
+-libuasharedtoolscloudmobi.dylib (compatibility version 0.0.0, current version 0.0.0)
+-libuasharedtoolsapplovin.dylib (compatibility version 0.0.0, current version 0.0.0)
+-libuasharedanaltyicsflurry.dylib (compatibility version 0.0.0, current version 0.0.0)
+-libuasharedtoolsinmobi.dylib (compatibility version 0.0.0, current version 0.0.0)
+-libuasharedtoolsappnext.dylib (compatibility version 0.0.0, current version 0.0.0)
+-libuasharedtoolsmobvista.dylib (compatibility version 0.0.0, current version 0.0.0)
+-CrackPlus.dylib (compatibility version 0.0.0, current version 0.0.0)
+-libuasharedtools.dylib (compatibility version 0.0.0, current version 0.0.0)
+-libuasharedanaltyics.dylib (compatibility version 0.0.0, current version 0.0.0)
+-libuasharedtoolsfacebook.dylib (compatibility version 0.0.0, current version 0.0.0)
+-libuasharedtoolsgoogle.dylib (compatibility version 0.0.0, current version 0.0.0)
+</td><td>-</td></tr>
+                            </div></table>
+                            
