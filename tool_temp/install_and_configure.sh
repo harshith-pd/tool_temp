@@ -31,12 +31,13 @@
 #     usage="$(basename "$0") -input_app_file=<input file location> -input_source_code=<input source code>"
      usage="$(basename "$0") -input_app_file=<input file location>"
 
-     WORKSPACE="$HOME/Desktop/security_tool/tool_temp"
+     #WORKSPACE="$HOME/Desktop/security_tool/tool_temp"
      TMP_FOLDER_LOCATION="${WORKSPACE}/.tmp"
      SCRIPTS_FOLDER="${WORKSPACE}/Scripts"
      TOOLS_FOLDER="${WORKSPACE}/Tools"
      TEST_RUN_FOLDER="${WORKSPACE}/test_run"
-     CONSTANTS_FILE_LOCATION="Scripts/Constants.py"
+     CONSTANTS_FILE_LOCATION="${WORKSPACE}/Scripts/Constants.py"
+     LATEST_RUN_INSTANCE="${WORKSPACE}/last_run"
 
      APK_TOOL_COMMAND="java -jar ${WORKSPACE}/Tools/apktool.jar"
      ENJARIFY_TOOL_COMMAND="${WORKSPACE}/Tools/enjarify-master/enjarify.sh"
@@ -46,6 +47,7 @@
      app_source_code_path=""
      app_type=""
 
+     latest_run_folder=''
 ## folder structures
     ios_folder_structure=( "INPUT_FOLDER:input" "OUTPUT_FOLDER:output" "LOGS_FOLDER:logs" "REPORT_FOLDER:report" "CONFIG_FOLDER:config" )
     android_folder_structure=( "INPUT_FOLDER:input" "APKTOOL_OUTPUT_FOLDER:output/apktool" "ENJARIFY_OUTPUT_FOLDER:output/enjarify" "LOGS_FOLDER:logs" "REPORT_FOLDER:report" "CONFIG_FOLDER:config" )
@@ -70,6 +72,8 @@ handle_error () {
 clean_up_temp () {
     mkdir -p "$TMP_FOLDER_LOCATION"
     rm -rf "$TMP_FOLDER_LOCATION"/*
+    mkdir -p "$LATEST_RUN_INSTANCE"
+    rm -rf "$LATEST_RUN_INSTANCE"/*
 }
 
 #####################################################################################
@@ -192,6 +196,7 @@ create_ios_app_instance_folder () {
         echo "$KEY = \"${TEST_RUN_FOLDER}/$app_name/$date_time/$VALUE\"\n" >> "$TMP_FOLDER_LOCATION"/tmp.txt
     done
 
+    latest_run_folder="${TEST_RUN_FOLDER}/$app_name/$date_time"
     cp -r ${TMP_FOLDER_LOCATION}/Payload/*.app/ ${TEST_RUN_FOLDER}/$app_name/$date_time/output/
     cp -f "$app_file" "${TEST_RUN_FOLDER}/$app_name/$date_time/input/"
     cp -f "${WORKSPACE}/config/Config_$app_type.xml" "${TEST_RUN_FOLDER}/$app_name/$date_time/config/"
@@ -217,6 +222,7 @@ create_android_app_instance_folder () {
         echo "$KEY = \"${TEST_RUN_FOLDER}/$app_name/$date_time/$VALUE\"\n" >> "$TMP_FOLDER_LOCATION"/tmp.txt
     done
 
+    latest_run_folder="${TEST_RUN_FOLDER}/$app_name/$date_time"
     cp -f "$app_file" "${TEST_RUN_FOLDER}/$app_name/$date_time/input/" 2>/dev/null 1>/dev/null
     cp -f "${WORKSPACE}/config/Config_$app_type.xml" "${TEST_RUN_FOLDER}/$app_name/$date_time/config/"
     $APK_TOOL_COMMAND d -f -o "${TEST_RUN_FOLDER}/$app_name/$date_time/output/apktool" "$app_file"  2>/dev/null 1>/dev/null|| handle_error "Error running apktool jar on the apk file"
@@ -242,6 +248,7 @@ run_security_scripts_on_application () {
     cd "${WORKSPACE}/Scripts"
     python3 Main_"$app_type".py || handle_error "Failure to run the Main script for security tests"
     cd "$current_directory"
+    cp -rf "$latest_run_folder"/* "$LATEST_RUN_INSTANCE"/
 }
 ################################## Consume options
 while [ $# -gt 0 ]

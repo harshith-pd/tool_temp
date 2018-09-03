@@ -117,18 +117,19 @@ REPORT_KEYS = (TITLE, DESCRIPTION, SEVERITY, STATUS, EXECUTION_OUTPUT, REMEDIATI
 
 
 
-##########################################
-APP_NAME = "WhatsApp"
+ 
+########################################## 
+APP_NAME = "Altoro-App"
 
-INPUT_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/WhatsApp/08_21_2018_12_13_08/input"
+INPUT_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/Altoro-App/08_29_2018_17_11_43/input"
 
-OUTPUT_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/WhatsApp/08_21_2018_12_13_08/output"
+OUTPUT_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/Altoro-App/08_29_2018_17_11_43/output"
 
-LOGS_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/WhatsApp/08_21_2018_12_13_08/logs"
+LOGS_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/Altoro-App/08_29_2018_17_11_43/logs"
 
-REPORT_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/WhatsApp/08_21_2018_12_13_08/report"
+REPORT_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/Altoro-App/08_29_2018_17_11_43/report"
 
-CONFIG_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/WhatsApp/08_21_2018_12_13_08/config"
+CONFIG_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/Altoro-App/08_29_2018_17_11_43/config"
 
 TEST_RUN_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run"
 

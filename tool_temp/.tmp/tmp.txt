@@ -1,0 +1,22 @@
+APP_NAME = "Altoro-App"
+
+INPUT_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/Altoro-App/08_29_2018_17_11_43/input"
+
+OUTPUT_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/Altoro-App/08_29_2018_17_11_43/output"
+
+LOGS_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/Altoro-App/08_29_2018_17_11_43/logs"
+
+REPORT_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/Altoro-App/08_29_2018_17_11_43/report"
+
+CONFIG_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/Altoro-App/08_29_2018_17_11_43/config"
+
+TEST_RUN_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run"
+
+CONFIG_ROOT_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/config"
+
+SCRIPTS_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/Scripts"
+
+TOOLS_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/Tools"
+
+TMP_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/.tmp"
+
