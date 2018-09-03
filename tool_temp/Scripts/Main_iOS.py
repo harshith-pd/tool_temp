@@ -35,16 +35,5 @@ for test_name in config_xml_dict.keys():
     logging.info(f"{execution_result[Constants.EXECUTION_OUTPUT]}\n")
     test_dict[Constants.STATUS] = execution_result[Constants.STATUS]
     test_dict[Constants.EXECUTION_OUTPUT] = execution_result[Constants.EXECUTION_OUTPUT]
-    report_string += f"<tr>"
-    for report_key in Constants.REPORT_KEYS:
-        try:
-            report_string += f"<td>{test_dict[report_key]}</td><>"
-        except:
-            report_string += f"<td>-</td>"
-    report_string += f"</tr>"
 
-
-report_string += Constants.REPORT_BOILER_PLATE_ENDING
-
-with open(f"{Constants.REPORT_FOLDER}/report.html", "w") as report_file:
-    report_file.write(report_string)
+print (f"{test_dict}")

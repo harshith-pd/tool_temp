@@ -5,32 +5,36 @@ from HelperFunctions import *
 import Constants
 
 
-def check_signing_info(verification_keys=None, original_folder_path=None):
+def check_signing_info():
     # execute the shell command to check the print the certificate contents
     # return boolean by checking if the signing key is debug key from the shell command execution output
+    execution_result = {Constants.STATUS: Constants.PASS, Constants.EXECUTION_OUTPUT: "\n"}
+    verification_keys = Constants.DEBUG_SIGNATURE
+    original_folder_path = f"{Constants.APKTOOL_OUTPUT_FOLDER}/{Constants.APKTOOL_OUTPUT_FOLDER}"
 
     execution_output_from_shell_command = execute_shell_command(
         "keytool -printcert -file {}/META-INF/CERT.RSA".format(original_folder_path))
 
     if verification_keys in execution_output_from_shell_command:
-        logging.info("App signed using a debug key")
-        return "{} found in signing key. App signed using a debug keystore".format(verification_keys)
+        execution_result[Constants.EXECUTION_OUTPUT] += f"{verification_keys} found in signing key. App signed using a debug keystore\n"
+        execution_result[Constants.STATUS] = Constants.FAIL
     else:
-        logging.info("App signed using a debug key")
-        return "{} - {} not found in signing key. App not signed using a debug keystore".format(Constants.SEVERE, verification_keys)
+        execution_result[Constants.EXECUTION_OUTPUT] += f"{verification_keys} not found in signing key. App not signed using a debug keystore\n"
 
+    return execution_result
 
-def android_xml_content_verification(android_manifest_xml_path=None):
+def android_xml_content_verification():
     # read the contents of the manifest xml into a variable
     # get the regex from the regex file
     # check for each regex expression
     # fill the execution_output variable with the result of the regex matches
     # return the value
+    execution_result = {Constants.STATUS: Constants.PASS, Constants.EXECUTION_OUTPUT: "\n"}
+    android_manifest_xml_path = f"{Constants.APKTOOL_OUTPUT_FOLDER}/AndroidManifest.xml"
 
     with open(android_manifest_xml_path, 'r') as file:
         # read android manifest xml file into string variable
         android_xml_file_contents = file.read()
-    execution_output = ""
     verification_keys = get_manifest_xml_regex()
 
     for key in verification_keys.keys():
@@ -40,27 +44,25 @@ def android_xml_content_verification(android_manifest_xml_path=None):
             component = 0
             component_name = 1
             for application_components in regex_expression_variable.findall(android_xml_file_contents):
-                logging.info("{} with name {} has android:exported set to true".format(application_components[component],application_components[component_name]))
-                execution_output = "{} - {}, {} with name {} has android:exported set to true".format(Constants.MEDIUM,execution_output,application_components[component],application_components[component_name])
+                execution_result[Constants.EXECUTION_OUTPUT] += f"{application_components[component]} with name {application_components[component_name]} has android:exported set to true\n"
+                execution_result[Constants.STATUS] = Constants.FAIL
 
         elif Constants.ANDROID_PROTECTION_LEVEL_KEY in key:
             permission_name = 0
             protection_level = 1
             for permission in regex_expression_variable.findall(android_xml_file_contents):
                 if permission[protection_level] != Constants.ANDROID_PROTECTION_VALUE_SIGNATURE:
-                    logging.info("permission with name {} has android:protectionlevel set to {}".format(permission[permission_name],permission[protection_level]))
-                    execution_output = "{} - {}, permission with name {} has android:protectionlevel set to {}".format(Constants.MEDIUM,execution_output,permission[permission_name],permission[protection_level])
-
+                    execution_result[Constants.EXECUTION_OUTPUT] += f"permission with name {permission[permission_name]} has android:protectionlevel set to {permission[protection_level]}\n"
+                    execution_result[Constants.STATUS] = Constants.FAIL
         else:
-            for regex_matches in regex_expression_variable.findall(android_xml_file_contents):
-                logging.info("{} set to true : {}".format(key, regex_matches))
-                execution_output = "{} - {}, {} set to true : {}".format(Constants.MEDIUM, execution_output,key, regex_matches)
+            for regex_match in regex_expression_variable.findall(android_xml_file_contents):
+                execution_result[Constants.EXECUTION_OUTPUT] += f"{key} set to true : {regex_match}\n"
+                execution_result[Constants.STATUS] = Constants.FAIL
 
-    if len(execution_output) == 0:
-        logging.info("No issues foung in {}".format(android_manifest_xml_path))
-        execution_output = "No issues foung in {}".format(android_manifest_xml_path)
+    if execution_result[Constants.STATUS] == Constants.PASS:
+        execution_result[Constants.EXECUTION_OUTPUT] += f"No issues foung in {android_manifest_xml_path}\n"
 
-    return execution_output
+    return execution_result
 
 
 def check_permissions(android_manifest_xml_path=None):

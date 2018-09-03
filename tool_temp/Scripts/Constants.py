@@ -3,7 +3,7 @@ NOT_A_ZIP = "not a zip file"
 CORRUPT = "corrupt"
 SUCCESS = "SUCCESS"
 
-#APKTOOL structure
+#APKTOOL folder names
 ASSETS_FOLDER = "assets"
 RES_FOLDER = "res"
 ANDROID_MANIFEST = "AndroidManifest"
@@ -12,13 +12,15 @@ LIB_FOLDER = "lib"
 PERMISSIONS_ANDROID_MANIFEST = "permissions"
 ORIGINAL_FOLDER = "original"
 
+#Verification items for the signing info
+DEBUG_SIGNATURE = "CN=Android Debug"
+
 #Verification items for manifest xml
 ANDROID_DEBUGGABLE_KEY = "android_debuggable"
 ANDROID_ALLOW_BACKUP_KEY = "android_allow_backup"
 ANDROID_FULL_BACKUP_CONTENT_KEY = "android_full_backup"
 ANDROID_EXPORTED_KEY = "android_exported"
 ANDROID_PROTECTION_LEVEL_KEY = "android_protection_level"
-
 ANDROID_PROTECTION_VALUE_SIGNATURE = "signature"
 
 #Verification items for re/xml
@@ -118,25 +120,35 @@ REPORT_KEYS = (TITLE, DESCRIPTION, SEVERITY, STATUS, EXECUTION_OUTPUT, REMEDIATI
 
 
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 ########################################## 
-APP_NAME = "Altoro-App"
+APP_NAME = "com.ibm.android.analyzer.test"
 
-INPUT_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/Altoro-App/08_29_2018_17_11_43/input"
+INPUT_FOLDER = "/Users/harshith/PycharmProjects/android_restructuring/tool_temp/test_run/com.ibm.android.analyzer.test/09_03_2018_23_41_29/input"
 
-OUTPUT_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/Altoro-App/08_29_2018_17_11_43/output"
+APKTOOL_OUTPUT_FOLDER = "/Users/harshith/PycharmProjects/android_restructuring/tool_temp/test_run/com.ibm.android.analyzer.test/09_03_2018_23_41_29/output/apktool"
 
-LOGS_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/Altoro-App/08_29_2018_17_11_43/logs"
+ENJARIFY_OUTPUT_FOLDER = "/Users/harshith/PycharmProjects/android_restructuring/tool_temp/test_run/com.ibm.android.analyzer.test/09_03_2018_23_41_29/output/enjarify"
 
-REPORT_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/Altoro-App/08_29_2018_17_11_43/report"
+LOGS_FOLDER = "/Users/harshith/PycharmProjects/android_restructuring/tool_temp/test_run/com.ibm.android.analyzer.test/09_03_2018_23_41_29/logs"
 
-CONFIG_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run/Altoro-App/08_29_2018_17_11_43/config"
+REPORT_FOLDER = "/Users/harshith/PycharmProjects/android_restructuring/tool_temp/test_run/com.ibm.android.analyzer.test/09_03_2018_23_41_29/report"
 
-TEST_RUN_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/test_run"
+CONFIG_FOLDER = "/Users/harshith/PycharmProjects/android_restructuring/tool_temp/test_run/com.ibm.android.analyzer.test/09_03_2018_23_41_29/config"
 
-CONFIG_ROOT_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/config"
+TEST_RUN_FOLDER = "/Users/harshith/PycharmProjects/android_restructuring/tool_temp/test_run"
 
-SCRIPTS_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/Scripts"
+CONFIG_ROOT_FOLDER = "/Users/harshith/PycharmProjects/android_restructuring/tool_temp/config"
 
-TOOLS_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/Tools"
+SCRIPTS_FOLDER = "/Users/harshith/PycharmProjects/android_restructuring/tool_temp/Scripts"
 
-TMP_FOLDER = "/Users/harshith/Desktop/security_tool/tool_temp/.tmp"
+TOOLS_FOLDER = "/Users/harshith/PycharmProjects/android_restructuring/tool_temp/Tools"
+
+TMP_FOLDER = "/Users/harshith/PycharmProjects/android_restructuring/tool_temp/.tmp"

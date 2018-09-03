@@ -13,13 +13,18 @@ logging.basicConfig(filename="{}/{}".format(logging_directory, "log.txt"),
                               level=logging.DEBUG)
 
 ### parse the config file
-xml_dict = parse_xml_to_dict("{}/{}".format(Constants.CONFIG_FOLDER, 'Config_Android.xml'))
+config_xml_dict = parse_xml_to_dict("{}/{}".format(Constants.CONFIG_FOLDER, 'config_android.xml'))
 
-test_result = {}
-for test_component in xml_dict.keys():
-    if TestComponents.APP_UNZIP.value in test_component:
-        test_result = execute_tests(xml_dict[TestComponents.APP_UNZIP.value]['Test'])
-    elif TestComponents.DEX_TO_JAR.value in test_component:
-        pass
-    else:
-        logging.error("Test not yet implemented")
+for test_name in config_xml_dict.keys():
+    test_dict = config_xml_dict[test_name]
+    execution_result = {}
+    logging.info(f"Execution Test - {test_dict['title']}\n")
+
+    execution_result = globals()[test_dict['test_function']]()
+
+    logging.info(f"{execution_result[Constants.STATUS]}\n")
+    logging.info(f"{execution_result[Constants.EXECUTION_OUTPUT]}\n")
+    test_dict[Constants.STATUS] = execution_result[Constants.STATUS]
+    test_dict[Constants.EXECUTION_OUTPUT] = execution_result[Constants.EXECUTION_OUTPUT]
+
+print (f"{test_dict}")
