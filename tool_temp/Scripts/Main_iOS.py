@@ -16,10 +16,8 @@ logging.basicConfig(filename="{}/{}".format(logging_directory, "log.txt"),
 INFO_PLIST_PATH = f"{Constants.OUTPUT_FOLDER}/Info.plist"
 APP_EXECUTABLE_PATH = f"{Constants.OUTPUT_FOLDER}/{Constants.APP_NAME}"
 
-config_xml_dict = parse_xml_to_dict("{}/{}".format(Constants.CONFIG_FOLDER, 'Config_iOS.xml'))
-
-
-report_string = Constants.REPORT_BOILER_PLATE_BEGINNING
+### parse the config file
+config_xml_dict = parse_xml_to_dict("{}/{}".format(Constants.CONFIG_FOLDER, 'config_ios.xml'))
 
 for test_name in config_xml_dict.keys():
     test_dict = config_xml_dict[test_name]
@@ -35,5 +33,7 @@ for test_name in config_xml_dict.keys():
     logging.info(f"{execution_result[Constants.EXECUTION_OUTPUT]}\n")
     test_dict[Constants.STATUS] = execution_result[Constants.STATUS]
     test_dict[Constants.EXECUTION_OUTPUT] = execution_result[Constants.EXECUTION_OUTPUT]
+    logging.info("*****************//////////********************")
 
-print (f"{test_dict}")
+
+print (f"{config_xml_dict}")

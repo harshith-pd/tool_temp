@@ -10,7 +10,7 @@ def check_signing_info():
     # return boolean by checking if the signing key is debug key from the shell command execution output
     execution_result = {Constants.STATUS: Constants.PASS, Constants.EXECUTION_OUTPUT: "\n"}
     verification_keys = Constants.DEBUG_SIGNATURE
-    original_folder_path = f"{Constants.APKTOOL_OUTPUT_FOLDER}/{Constants.APKTOOL_OUTPUT_FOLDER}"
+    original_folder_path = f"{Constants.APKTOOL_OUTPUT_FOLDER}/{Constants.ORIGINAL_FOLDER}"
 
     execution_output_from_shell_command = execute_shell_command(
         "keytool -printcert -file {}/META-INF/CERT.RSA".format(original_folder_path))
@@ -64,9 +64,10 @@ def android_xml_content_verification():
 
     return execution_result
 
-
-def check_permissions(android_manifest_xml_path=None):
+def check_permissions():
     standard_android_permission_file_path = "{}/{}".format(Constants.SCRIPTS_FOLDER, "/Permissionsfile.txt")
+    execution_result = {Constants.STATUS: Constants.PASS, Constants.EXECUTION_OUTPUT: "\n"}
+    android_manifest_xml_path = f"{Constants.APKTOOL_OUTPUT_FOLDER}/AndroidManifest.xml"
 
     # construct regex to match the user features/permissions
     regex_string_for_matching_permissions_and_features_in_android_manifest_xml = get_permissions_regex()
@@ -93,44 +94,24 @@ def check_permissions(android_manifest_xml_path=None):
                 # if the permission matches any entry in the permissions file, log it
                 if (standard_android_permission.split(':')[permission_or_feature_id] in
                         permission_or_feature[permission_or_feature_name]):
-
-                    logging.info("{} name : {} present in android_manifest.xml file".format(
-                        permission_or_feature[permission_or_feature_id],
-                        permission_or_feature[permission_or_feature_name])
-                    )
-
-                    execution_output = "{} - {}, {} name : {} present in android_manifest.xml file".format(
-                        Constants.MEDIUM,
-                        execution_output,
-                        permission_or_feature[permission_or_feature_id],
-                        permission_or_feature[permission_or_feature_name]
-                    )
+                   execution_result[Constants.EXECUTION_OUTPUT] += f"{permission_or_feature[permission_or_feature_id]} name : {permission_or_feature[permission_or_feature_name]} present in android_manifest.xml file\n"
+                   execution_result[Constants.STATUS] = Constants.FAIL
                     # skip to next iteration if entry found
-                    break
+                   break
             if permission_or_feature[permission_or_feature_name] not in execution_output:
                 # if no matches found, log the custom permission
-                logging.info("{} name : {} is a custom-permission /feature present in android_manifest.xml file".format(
-                    permission_or_feature[permission_or_feature_id],
-                    permission_or_feature[permission_or_feature_name])
-                )
-
-                execution_output = "{} - {}, {} name : {} is custom-permission/feature present in android_manifest.xml file".format(
-                    Constants.MEDIUM,
-                    execution_output,
-                    permission_or_feature[permission_or_feature_id],
-                    permission_or_feature[permission_or_feature_name]
-                )
-
+                execution_result[Constants.EXECUTION_OUTPUT] += f"{permission_or_feature[permission_or_feature_id],} name : {permission_or_feature[permission_or_feature_name]} is custom-permission/feature present in android_manifest.xml file\n"
+                execution_result[Constants.STATUS] = Constants.FAIL
     if len(execution_output) == 0:
-        logging.info("No permissions entries found")
-        execution_output = "No permissions entries found"
+        execution_result[Constants.EXECUTION_OUTPUT] += "No permissions entries found"
 
-    return execution_output
+    return execution_result
 
 
-def check_smali_files(smali_folder_path=None):
+def check_smali_files():
     # check for the extension of the files if any other file is present other than that with smali extension
-    execution_output = ""
+    execution_result = {Constants.STATUS: Constants.PASS, Constants.EXECUTION_OUTPUT: "\n"}
+    smali_folder_path = f"{Constants.APKTOOL_OUTPUT_FOLDER}/{Constants.SMALI_FOLDER}"
 
     for root, subdirs, files in os.walk(smali_folder_path):
         logging.info("Checking folder : {}".format(root))
@@ -138,18 +119,15 @@ def check_smali_files(smali_folder_path=None):
         for file in files:
 
             if "smali" not in file:
-                logging.info("{}/{} is not a smali file".format(root, file))
-                execution_output = "{} - {}, {}/{} is not a smali file".format(Constants.MEDIUM, execution_output, root, file)
+                execution_result[Constants.EXECUTION_OUTPUT] += f"{root}/{file} is not a smali file\n"
+                execution_result[Constants.STATUS] = Constants.FAIL
 
-    if len(execution_output) == 0:
-        logging.info("No unencrypted files found")
-        execution_output = "No unencrypted files found"
-
-    return execution_output
+    return execution_result
 
 
-def check_assets_folder(assets_folder_path=None):
-    execution_output = ""
+def check_assets_folder():
+    execution_result = {Constants.STATUS: Constants.PASS, Constants.EXECUTION_OUTPUT: "\n"}
+    assets_folder_path = f"{Constants.APKTOOL_OUTPUT_FOLDER}/{Constants.ASSETS_FOLDER}"
     for assets_folder_content in os.listdir(assets_folder_path):
         absolute_path_of_assets_folder_content = "{}/{}".format(assets_folder_path,assets_folder_content)
         # check if any of them are directories
@@ -165,7 +143,8 @@ def check_assets_folder(assets_folder_path=None):
                         sub_folder_contents.append("\nFiles present in directory : {}".format(root))
                         sub_folder_contents.append("{}".format('\n'.join(files)))
             logging.info("\n{}\n".format("\n".join(sub_folder_contents)))
-            execution_output = "{} - {} is not encrypted/zipped".format(Constants.MEDIUM, absolute_path_of_assets_folder_content)
+            execution_result[Constants.EXECUTION_OUTPUT] += f"{absolute_path_of_assets_folder_content} is not encrypted/zipped\n"
+            execution_result[Constants.STATUS] = Constants.FAIL
 
         elif os.path.isfile(absolute_path_of_assets_folder_content):
             clear_directory(Constants.TMP_FOLDER)
@@ -177,7 +156,7 @@ def check_assets_folder(assets_folder_path=None):
 
                 if unzip_status == Constants.ENCRYPTED or unzip_status == Constants.CORRUPT or unzip_status == Constants.NOT_A_ZIP:
                     logging.info("{} is {}".format(absolute_path_of_assets_folder_content,unzip_status))
-                    execution_output = "{} is encrypted".format(Constants.MEDIUM, absolute_path_of_assets_folder_content)
+                    execution_result[Constants.EXECUTION_OUTPUT] += f"{absolute_path_of_assets_folder_content} is encrypted\n"
                 else:
                     # if unzip successful, print the contents
                     logging.info("{} unzipped, listing contents...".format(absolute_path_of_assets_folder_content))
@@ -188,17 +167,18 @@ def check_assets_folder(assets_folder_path=None):
                             if any(".js" in file or ".css" in file or ".html" in file for file in files):
                                 sub_folder_contents.append("{}".format('\n'.join(files)))
                     logging.info("\n{}\n".format("\n".join(sub_folder_contents)))
-                    execution_output = "{} - {} is not encrypted".format(Constants.MEDIUM, absolute_path_of_assets_folder_content)
+                    execution_result[Constants.EXECUTION_OUTPUT] += f"{absolute_path_of_assets_folder_content} is not encrypted\n"
+                    execution_result[Constants.STATUS] = Constants.FAIL
         else:
             logging.info("{} is individual file".format(absolute_path_of_assets_folder_content))
-    return execution_output
+    return execution_result
 
-def check_res_xml_config_file(res_config_file_path=None):
+def check_res_xml_config_file(res_config_file_path):
     # read the contents of the config.xml file into a variable
     # get the regex expressions from the regex expressions file
     # check for matches from the regex expressions file
     # return the match results
-    execution_output = ""
+    execution_result = {Constants.STATUS: Constants.PASS, Constants.EXECUTION_OUTPUT: "\n"}
 
     with open(res_config_file_path, 'r') as file:
         # read config xml file into string variable
@@ -211,133 +191,45 @@ def check_res_xml_config_file(res_config_file_path=None):
             for regex_match in regex_expression.findall(config_xml_file_contents):
 
                 if Constants.ACCESS_ORIGIN_KEY == regex_expression_key:
-                    logging.info("{} is set for access origin".format(regex_match))
-                    execution_output = "{}, {} is set for access origin".format(execution_output,regex_match)
+                    execution_result[Constants.EXECUTION_OUTPUT] += f"{regex_match} is set for access origin\n"
+                    execution_result[Constants.STATUS] = Constants.FAIL
 
                 elif Constants.ALLOW_INTENT_KEY == regex_expression_key:
 
                     if Constants.ALLOW_INTENT_HTTPS == regex_match:
-                        logging.info("{} is set for allowing https access".format(regex_match))
-                        execution_output = "{}, {} is set for https access".format(execution_output,regex_match)
+                        execution_result[Constants.EXECUTION_OUTPUT] += f"{regex_match} is set for https access\n"
+                        execution_result[Constants.STATUS] = Constants.FAIL
 
                     elif Constants.ALLOW_INTENT_HTTP == regex_match:
-                        logging.info("{} is set for allowing http access".format(regex_match))
-                        execution_output = "{}, {} is set for http access".format(execution_output,regex_match)
+                        execution_result[Constants.EXECUTION_OUTPUT] += f"{regex_match} is set for http access\n"
+                        execution_result[Constants.STATUS] = Constants.FAIL
 
                 elif Constants.ALLOW_INTENT_NAVIGATION_KEY == regex_expression_key:
-                    logging.info("{} is set for allowing navigation".format(regex_match))
-                    execution_output = "{}, {} is set for allowing navigation".format(execution_output,regex_match)
+                    execution_result[Constants.EXECUTION_OUTPUT] += f"{regex_match} is set for allowing navigation\n"
+                    execution_result[Constants.STATUS] = Constants.FAIL
 
-    return execution_output
+    return execution_result
 
 
-def check_res_folder(res_folder_path=None):
+def check_res_folder():
     # if config.xml file is present call the corresponding function
     # if network_security.xml file is present call the corresponding function
-    execution_output = []
+    execution_result = {Constants.STATUS: Constants.PASS, Constants.EXECUTION_OUTPUT: "\n"}
+    res_folder_path = f"{Constants.APKTOOL_OUTPUT_FOLDER}/{Constants.RES_FOLDER}"
 
-    res_config_file_path = "{}/xml/config.xml".format(res_folder_path)
-    res_network_security_config_file_path = "{}/xml/network_security_config.xml".format(res_folder_path)
+    res_config_file_path = f"{res_folder_path}/xml/config.xml"
+    res_network_security_config_file_path = f"{res_folder_path}/xml/network_security_config.xml"
 
     if os.path.exists(res_config_file_path):
-        execution_output.append(check_res_xml_config_file(res_config_file_path))
+        execution_result = check_res_xml_config_file(res_config_file_path)
     else:
-        logging.info("{} not found".format(res_config_file_path))
-        execution_output.append("{}, {} is not found".format(execution_output, res_config_file_path))
+        execution_result[Constants.EXECUTION_OUTPUT] += f"{res_config_file_path} is not found\n"
+        execution_result[Constants.STATUS] = Constants.FAIL
 
     if os.path.exists(res_network_security_config_file_path):
         pass
     else:
-        logging.info("{} not found".format(res_network_security_config_file_path))
-        execution_output.append("{}, {} is not found".format(execution_output, res_network_security_config_file_path))
+        execution_result[Constants.EXECUTION_OUTPUT] += f"{res_network_security_config_file_path} is not found\n"
 
-    return "\n".join(execution_output)
+    return execution_result
 
-
-def check_lib_folder(lib_folder_path=None):
-    print(lib_folder_path)
-    pass
-    # iterate over the contents and check if they can be decompiled
-
-
-def execute_tests(test_dictionary):
-    # iterate over the folder structure in the output folder
-    # match the name of the folder from the test dictionary and execute tests if the test-folder is present
-    # add the result to the test dictionary with result as the key
-    # return the dictionary
-    folders_array = test_dictionary['Folder']
-    execution_result = ""
-    for folder in folders_array:
-
-        if folder['FolderName'] in Constants.ORIGINAL_FOLDER:
-            logging.info("*********\n******** original Folder Check *************\n\n")
-            original_folder_path = "{}/{}".format(Constants.APKTOOL_OUTPUT_FOLDER, Constants.ORIGINAL_FOLDER)
-
-            if os.path.exists(original_folder_path):
-                execution_result = check_signing_info(folder['verification_keys'], original_folder_path)
-            else:
-                logging.info("{} folder not found".format(Constants.ORIGINAL_FOLDER))
-                execution_result = "{} folder not found".format(Constants.ORIGINAL_FOLDER)
-
-        elif folder['FolderName'] in Constants.ANDROID_MANIFEST:
-            logging.info("*********\n******** AndroidManifest xml Check *************\n\n")
-            android_manifest_xml_path = "{}/{}".format(Constants.APKTOOL_OUTPUT_FOLDER, "AndroidManifest.xml")
-
-            if os.path.exists(android_manifest_xml_path):
-                execution_result = android_xml_content_verification(android_manifest_xml_path)
-            else:
-                log_error_and_exit("{} not found to verify the manifest xml contents".format(android_manifest_xml_path))
-
-        elif folder['FolderName'] in Constants.PERMISSIONS_ANDROID_MANIFEST:
-            logging.info("*********\n******** permissions Check *************\n\n")
-            android_manifest_xml_path = "{}/{}".format(Constants.APKTOOL_OUTPUT_FOLDER, "AndroidManifest.xml")
-
-            if os.path.exists(android_manifest_xml_path):
-                execution_result = check_permissions(android_manifest_xml_path)
-            else:
-                log_error_and_exit("{} not found to verify the manifest xml permissions".format(android_manifest_xml_path))
-
-        elif folder['FolderName'] in Constants.SMALI_FOLDER:
-            logging.info("*********\n******** smali Folder Check *************\n\n")
-            smali_folder_path = "{}/{}".format(Constants.APKTOOL_OUTPUT_FOLDER, Constants.SMALI_FOLDER)
-            if os.path.exists(smali_folder_path):
-                execution_result = check_smali_files(smali_folder_path)
-            else:
-                logging.info("{} folder not found".format(Constants.SMALI_FOLDER))
-                execution_result = "{} folder not found".format(Constants.SMALI_FOLDER)
-
-        elif folder['FolderName'] in Constants.ASSETS_FOLDER:
-            logging.info("*********\n******** Assets Folder Check *************\n\n")
-            assets_folder_path = "{}/{}".format(Constants.APKTOOL_OUTPUT_FOLDER,Constants.ASSETS_FOLDER)
-
-            if os.path.exists(assets_folder_path):
-                execution_result = check_assets_folder(assets_folder_path)
-            else:
-                logging.info("{} folder not found".format(Constants.ASSETS_FOLDER))
-                execution_result = "{} folder not found".format(Constants.ASSETS_FOLDER)
-
-        elif folder['FolderName'] in Constants.RES_FOLDER:
-            logging.info("*********\n******** res Folder Check *************\n\n")
-            res_folder_path = "{}/{}".format(Constants.APKTOOL_OUTPUT_FOLDER, Constants.RES_FOLDER)
-
-            if os.path.exists(res_folder_path):
-                execution_result = check_res_folder(res_folder_path)
-            else:
-                logging.info("{} folder not found".format(Constants.RES_FOLDER))
-                execution_result = "{} folder not found".format(Constants.RES_FOLDER)
-
-        elif folder['FolderName'] in Constants.LIB_FOLDER:
-            logging.info("*********\n******** lib Folder Check *************\n\n")
-            lib_folder_path = "{}/{}".format(Constants.APKTOOL_OUTPUT_FOLDER,Constants.LIB_FOLDER)
-
-            if os.path.exists(lib_folder_path):
-                execution_result = check_lib_folder(lib_folder_path)
-            else:
-                logging.info("{} folder not found".format(Constants.LIB_FOLDER))
-                execution_result = "{} folder not found".format(Constants.LIB_FOLDER)
-
-
-
-        folder['execution_result'] = execution_result
-    test_dictionary['Folder'] = folders_array
-    return test_dictionary

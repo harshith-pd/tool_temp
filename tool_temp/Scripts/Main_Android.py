@@ -26,5 +26,6 @@ for test_name in config_xml_dict.keys():
     logging.info(f"{execution_result[Constants.EXECUTION_OUTPUT]}\n")
     test_dict[Constants.STATUS] = execution_result[Constants.STATUS]
     test_dict[Constants.EXECUTION_OUTPUT] = execution_result[Constants.EXECUTION_OUTPUT]
+    logging.info("*****************//////////********************")
 
-print (f"{test_dict}")
+print (f"{config_xml_dict}")

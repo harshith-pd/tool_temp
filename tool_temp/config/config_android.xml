@@ -1,20 +1,47 @@
-  <Tests>
-    <Test_iOS_1>
-      <title>check_signing_info</title>
-      <ID>1</ID>
-      <test_function>check_signing_info</test_function>
-      <component_type>apktool</component_type>
-      <severity>MEDIUM</severity>
-      <description>-</description>
-      <remediation>-</remediation>
-    </Test_iOS_1>
-    <Test_iOS_2>
-      <title>android_xml_content_verification</title>
-      <ID>1</ID>
-      <test_function>android_xml_content_verification</test_function>
-      <component_type>apktool</component_type>
-      <severity>MEDIUM</severity>
-      <description>-</description>
-      <remediation>-</remediation>
-    </Test_iOS_2>
+<Tests>
+<Test_Android_1>
+<title>check_signing_info</title>
+<ID>1</ID>
+<test_function>check_signing_info</test_function>
+<component_type>apktool</component_type>
+<severity>MEDIUM</severity>
+<description>-</description>
+<remediation>-</remediation>
+</Test_Android_1>
+<Test_Android_2>
+<title>android_xml_content_verification</title>
+<ID>1</ID>
+<test_function>android_xml_content_verification</test_function>
+<component_type>apktool</component_type>
+<severity>MEDIUM</severity>
+<description>-</description>
+<remediation>-</remediation>
+</Test_Android_2>
+<Test_Android_3>
+<title>check_permissions</title>
+<ID>1</ID>
+<test_function>check_permissions</test_function>
+<component_type>apktool</component_type>
+<severity>MEDIUM</severity>
+<description>-</description>
+<remediation>-</remediation>
+</Test_Android_3>
+<Test_Android_4>
+<title>check_smali_files</title>
+<ID>1</ID>
+<test_function>check_smali_files</test_function>
+<component_type>apktool</component_type>
+<severity>MEDIUM</severity>
+<description>-</description>
+<remediation>-</remediation>
+</Test_Android_4>
+<Test_Android_5>
+<title>check_assets_folder</title>
+<ID>1</ID>
+<test_function>check_assets_folder</test_function>
+<component_type>apktool</component_type>
+<severity>MEDIUM</severity>
+<description>-</description>
+<remediation>-</remediation>
+</Test_Android_5>
 </Tests>

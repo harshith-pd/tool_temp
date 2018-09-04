@@ -66,82 +66,24 @@ SEVERE = "Severe"
 MEDIUM = "Medium"
 LOW = "Low"
 
-#Report keys
-TITLE="title"
-DESCRIPTION="description"
-REMEDIATION="remediation"
-SEVERITY = "severity"
 STATUS = "test_result"
 EXECUTION_OUTPUT = "test_findings"
-REPORT_BOILER_PLATE_BEGINNING = f"""
-            <!DOCTYPE html>
-            <html>
-            <head>
-            <style>
-            table, th, td {{
-                border: 1px solid black;
-            }}
-            </style>
-            </head>
-            <body>
-            <table class='table table-bordered'>
-            <tr>
-            <th>{TITLE.replace('_',' ')}</th>
-            <th>{DESCRIPTION.replace('_',' ')}</th>
-            <th>{SEVERITY.replace('_',' ')}</th>
-            <th>{STATUS.replace('_',' ')}</th>
-            <th>{EXECUTION_OUTPUT.replace('_',' ')}</th>
-            <th>{REMEDIATION.replace('_',' ')}</th>
-            </tr>
-            """
-REPORT_BOILER_PLATE_ENDING = f"""</tr>
-                            </table>
-                            </body>
-                            </html>
-                            """
-REPORT_KEYS = (TITLE, DESCRIPTION, SEVERITY, STATUS, EXECUTION_OUTPUT, REMEDIATION)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
- 
- 
- 
- 
- 
  
  
  
 ########################################## 
-APP_NAME = "com.ibm.android.analyzer.test"
+APP_NAME = "Altoro-App"
 
-INPUT_FOLDER = "/Users/harshith/PycharmProjects/android_restructuring/tool_temp/test_run/com.ibm.android.analyzer.test/09_03_2018_23_41_29/input"
+INPUT_FOLDER = "/Users/harshith/PycharmProjects/android_restructuring/tool_temp/test_run/Altoro-App/09_05_2018_00_15_20/input"
 
-APKTOOL_OUTPUT_FOLDER = "/Users/harshith/PycharmProjects/android_restructuring/tool_temp/test_run/com.ibm.android.analyzer.test/09_03_2018_23_41_29/output/apktool"
+OUTPUT_FOLDER = "/Users/harshith/PycharmProjects/android_restructuring/tool_temp/test_run/Altoro-App/09_05_2018_00_15_20/output"
 
-ENJARIFY_OUTPUT_FOLDER = "/Users/harshith/PycharmProjects/android_restructuring/tool_temp/test_run/com.ibm.android.analyzer.test/09_03_2018_23_41_29/output/enjarify"
+LOGS_FOLDER = "/Users/harshith/PycharmProjects/android_restructuring/tool_temp/test_run/Altoro-App/09_05_2018_00_15_20/logs"
 
-LOGS_FOLDER = "/Users/harshith/PycharmProjects/android_restructuring/tool_temp/test_run/com.ibm.android.analyzer.test/09_03_2018_23_41_29/logs"
+REPORT_FOLDER = "/Users/harshith/PycharmProjects/android_restructuring/tool_temp/test_run/Altoro-App/09_05_2018_00_15_20/report"
 
-REPORT_FOLDER = "/Users/harshith/PycharmProjects/android_restructuring/tool_temp/test_run/com.ibm.android.analyzer.test/09_03_2018_23_41_29/report"
-
-CONFIG_FOLDER = "/Users/harshith/PycharmProjects/android_restructuring/tool_temp/test_run/com.ibm.android.analyzer.test/09_03_2018_23_41_29/config"
+CONFIG_FOLDER = "/Users/harshith/PycharmProjects/android_restructuring/tool_temp/test_run/Altoro-App/09_05_2018_00_15_20/config"
 
 TEST_RUN_FOLDER = "/Users/harshith/PycharmProjects/android_restructuring/tool_temp/test_run"
 
